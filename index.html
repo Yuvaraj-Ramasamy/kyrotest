@@ -1,0 +1,2831 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KyroCore Technologies — Engineering Tomorrow's Digital Core</title>
+  <meta name="description" content="Accelerate business growth through custom software engineering, workflow automation, cloud infrastructure, and data-driven digital transformation solutions." />
+
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- KyroCore Stylesheets -->
+  <link rel="stylesheet" href="styles/global.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+</head>
+<body>
+
+  <!-- Cinematic Core Boot Loader Overlay -->
+  <div id="system-boot">
+    <div class="boot-container">
+      
+      <!-- Pulsing Tech HUD Ring -->
+      <div class="boot-hud-wrapper">
+        <div class="boot-hud-ring ring-outer"></div>
+        <div class="boot-hud-ring ring-inner"></div>
+        <div class="boot-hud-core">
+          <span id="boot-percentage">00%</span>
+        </div>
+      </div>
+
+      <!-- Telemetry Info -->
+      <div class="boot-telemetry">
+        <div class="boot-title">KYROCORE CORE DIRECTIVE V2.6</div>
+        <div class="boot-bar-wrapper">
+          <div id="boot-progress-bar"></div>
+        </div>
+        
+        <!-- Single-line Boot Status Reveal -->
+        <div style="min-height: 28px; display: flex; align-items: center; justify-content: center;">
+          <span id="boot-status-text" style="font-family: var(--font-mono); font-size: clamp(11px, 1.8vw, 13px); color: var(--accent-secondary); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; text-shadow: 0 0 12px rgba(0, 242, 254, 0.4); display: inline-block; opacity: 0;"></span>
+        </div>
+
+        <!-- Access button (revealed at 100%) -->
+        <div class="boot-action-wrapper mt-3">
+          <button id="btn-activate-core" class="btn k-btn k-btn-primary py-3 px-4" style="display: none; font-size: 13px; font-weight: 800; border-radius: 12px; border: 1px solid rgba(0, 242, 254, 0.25);">
+            ACTIVATE DIGITAL CORE
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Background Grid Overlay -->
+  <div style="position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; opacity: 0.12;">
+    <div class="bg-grid" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(109, 124, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(109, 124, 255, 0.08) 1px, transparent 1px); background-size: 50px 50px;"></div>
+  </div>
+
+  <!-- Background WebGL Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Floating Cinematic Navbar -->
+  <header class="topbar">
+    <!-- Logo & Title -->
+    <a href="#" class="logo">
+      KYRO<span>CORE</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="d-none d-lg-flex align-items-center gap-1" aria-label="Primary">
+      <a class="k-navlink" href="#who">Who We Are</a>
+      <a class="k-navlink" href="#services">What We Do</a>
+      <a class="k-navlink" href="#mission">Our Approach</a>
+      <a class="k-navlink" href="#founder">Founder</a>
+      <a class="k-navlink" href="#contact">Contact</a>
+    </nav>
+
+    <!-- CTA & Audio Widgets -->
+    <div class="actions">
+      <!-- Audio Synthesizer Toggle -->
+      <button class="audio-toggle-btn" id="audio-toggle" aria-label="Toggle ambient soundtrack">
+        <div class="eq-container">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+        <span style="font-size: 10px; font-family: var(--font-mono); color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; user-select: none;">AUDIO</span>
+      </button>
+
+      <a class="btn k-btn k-btn-primary d-none d-md-inline-flex" href="#contact" role="button" style="padding: 0.5rem 1.15rem; font-size: 13px; border-radius: 12px;">
+        Get Proposal
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <!-- Mobile Nav Toggle -->
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Open menu" style="border: none; color: var(--text-primary); padding: 0.5rem;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile nav Offcanvas -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel" style="background: rgba(2, 3, 8, 0.95); backdrop-filter: blur(24px); border-left: 1px solid var(--border-glass);">
+    <div class="offcanvas-header" style="border-bottom: 1px solid var(--border-glass); padding: 1.5rem;">
+      <h5 class="offcanvas-title" id="mobileNavLabel" style="font-weight: 800; letter-spacing: 1px; font-family: var(--font-display);">KYROCORE</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between py-4 px-4">
+      <div class="d-flex flex-column gap-3">
+        <a class="k-navlink py-2" href="#who" data-bs-dismiss="offcanvas">Who We Are</a>
+        <a class="k-navlink py-2" href="#services" data-bs-dismiss="offcanvas">What We Do</a>
+        <a class="k-navlink py-2" href="#mission" data-bs-dismiss="offcanvas">Our Approach</a>
+        <a class="k-navlink py-2" href="#founder" data-bs-dismiss="offcanvas">Founder</a>
+        <a class="k-navlink py-2" href="#contact" data-bs-dismiss="offcanvas">Contact</a>
+      </div>
+      <div class="d-flex flex-column gap-2">
+        <a class="btn k-btn k-btn-primary w-100 py-3" href="#contact" data-bs-dismiss="offcanvas">Get a Proposal</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="k-hero">
+      <div class="container" style="max-width: 1120px;">
+        <div class="k-hero-grid">
+          
+          <!-- Hero Copy -->
+          <div>
+            <div class="k-badge mb-2">
+              <span class="k-dot" aria-hidden="true"></span>
+              Custom Software &amp; Workflow Automation
+            </div>
+
+            <!-- Reveal Animation Target Heading -->
+            <h2 class="text-reveal-target" style="font-size: clamp(24px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.04em;">
+              Kyro Core Technologies<br/>
+              <span class="k-gradient-text">Digital Core</span>
+            </h2>
+
+            <!-- Large Cycling Capabilites (KyroBiz behavior) -->
+            <div class="mt-2 mb-2" style="min-height: 48px; display: flex; align-items: center;">
+              <span id="typed-text" style="font-family: var(--font-sans); font-size: clamp(20px, 3.2vw, 36px); color: var(--accent-secondary); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700; text-shadow: 0 0 15px rgba(0, 242, 254, 0.45); display: inline-block; line-height: 1.2;">Neural Process Automation.</span>
+            </div>
+
+            <p class="k-subtitle mt-1 mb-3" style="max-width: 50ch; font-size: clamp(15px, 2vw, 17px); color: var(--text-secondary);"> 
+              KyroCore Technologies helps organizations accelerate growth through innovative software engineering, intelligent workflow automation, scalable cloud architectures, and data-driven business intelligence.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3 mb-4">
+              <a class="btn k-btn k-btn-primary px-4 py-3" href="#services">
+                Explore Services
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a class="btn k-btn px-4 py-3" href="#contact">Get a Proposal</a>
+            </div>
+
+            <!-- Mini features -->
+            <div class="d-flex gap-4 flex-wrap pt-4" style="border-top: 1px solid var(--border-glass);">
+              <div class="d-flex align-items-center gap-3">
+                <span class="k-icon-pill" style="width: 42px; height: 42px; font-size: 1.2rem; background: rgba(99, 102, 241, 0.05); border-color: rgba(99, 102, 241, 0.15);">⚡</span>
+                <div>
+                  <div class="fw-semibold" style="font-size: 13px;">Scalable Engineering</div>
+                  <div style="color: var(--text-secondary); font-size: 11px;">High-performance, modern architectures.</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center gap-3">
+                <span class="k-icon-pill" style="width: 42px; height: 42px; font-size: 1.2rem; background: rgba(0, 242, 254, 0.05); border-color: rgba(0, 242, 254, 0.15);">🎯</span>
+                <div>
+                  <div class="fw-semibold" style="font-size: 13px;">Business Value First</div>
+                  <div style="color: var(--text-secondary); font-size: 11px;">Measurable outcomes aligned to your goals.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual Widget (Terminal & Mini Founder Card) -->
+          <div class="k-hero-right">
+            
+            <!-- Floating Simulation Terminal -->
+            <div class="simulation-terminal">
+              <div class="terminal-header">
+                <div class="terminal-dots">
+                  <div class="terminal-dot red"></div>
+                  <div class="terminal-dot yellow"></div>
+                  <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-title">kyrocore-deployment.log</div>
+                <div style="width: 42px;"></div>
+              </div>
+              <div class="terminal-body" id="hero-terminal">
+                <div class="terminal-line"><span class="terminal-prompt">$</span> npm run start:digital-core</div>
+                <div class="terminal-line"><span class="terminal-output">Initializing KyroCore WebGL particle system...</span></div>
+                <div class="terminal-line"><span class="terminal-output">Configuring 3D core point-cloud geometries... OK</span></div>
+                <div class="terminal-line"><span class="terminal-output">Spawning detuned organ soundtrack sweep... OK</span></div>
+                <div class="terminal-line"><span class="terminal-success">✓ WebGL Core online. Move pointer to sway the 3D globe.</span></div>
+                <div class="terminal-line"><span class="terminal-prompt">$</span> <span class="blink">|</span></div>
+              </div>
+            </div>
+
+            <!-- Mini Founder Card -->
+            <div class="k-card p-3 d-flex align-items-center gap-3" style="background: rgba(17, 22, 37, 0.95);">
+              <div class="founder-photo" style="width: 70px; height: 70px;">
+                <img src="images/profile.png" alt="Yuvaraj Ramasamy" />
+              </div>
+              <div>
+                <h3 class="m-0" style="font-size: 14px; font-weight: 700; letter-spacing: 0.5px; font-family: var(--font-display);">YUVARAJ RAMASAMY</h3>
+                <p class="m-0" style="font-size: 11px; color: var(--text-secondary); line-height: 1.4;">
+                  Founder &amp; CEO • Technology Entrepreneur
+                </p>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                  <span style="display:inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-secondary); box-shadow: 0 0 5px var(--accent-secondary);"></span>
+                  <span style="font-size: 9px; color: var(--text-secondary); font-family: var(--font-mono); letter-spacing: 0.5px;">ACTIVE CONSOLE</span>
+                </div>
+              </div>
+              <a href="#founder" class="ms-auto btn k-btn py-1 px-3" style="font-size: 11px; border-radius: 8px;">Bio</a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: WHO WE ARE (Bento Grid Layout) -->
+    <section id="who" class="section" style="border-top: 1px solid var(--border-glass);">
+      <div class="container" style="max-width: 1120px;">
+        
+        <div class="row align-items-end mb-5 pb-3">
+          <div class="col-lg-6">
+            <div class="k-badge mb-2">Who We Are</div>
+            <h3 class="text-reveal-target" style="font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.03em;">Redefining Technology Partnership</h3>
+            <p class="k-subtitle mt-2" style="font-size: 15px;">We design, develop, deploy, and scale custom digital architectures for teams demanding top-tier execution.</p>
+          </div>
+          <div class="col-lg-6 d-none d-lg-block">
+            <div class="k-gradient-rule"></div>
+          </div>
+        </div>
+
+        <!-- Bento Grid Redesign -->
+        <div class="bento-grid">
+          
+          <!-- Card 1: Innovation (Col Span 2) -->
+          <div class="col-span-2">
+            <div class="k-card bento-card">
+              <div>
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                  <div class="k-icon-pill">⚡</div>
+                  <div class="hud-frame">
+                    <div class="hud-corner hud-tl"></div>
+                    <div class="hud-corner hud-tr"></div>
+                    <div class="hud-corner hud-bl"></div>
+                    <div class="hud-corner hud-br"></div>
+                    <span>ARCH // STACK</span>
+                  </div>
+                </div>
+                <h4 style="font-size: 20px; margin-bottom: 0.75rem;">Innovation-Driven Engineering</h4>
+                <p style="color: var(--text-secondary); font-size: 14.5px; line-height: 1.7; max-width: 60ch;">
+                  We implement robust software architectures using clean, modular code. Our engineering processes are built on modern frameworks, secure deployment pipelines, and efficient patterns designed to support long-term product lifecycles.
+                </p>
+              </div>
+              <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-glass); display: flex; gap: 3rem;">
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 24px; color: var(--accent-secondary); font-weight: 700;">100%</div>
+                  <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Clean Architecture</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 24px; color: #a5b4fc; font-weight: 700;">Zero</div>
+                  <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Legacy Bottlenecks</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Mission Quote (Col Span 1) -->
+          <div class="col-span-1">
+            <div class="k-card bento-card" style="background: linear-gradient(180deg, rgba(168, 85, 247, 0.04) 0%, rgba(4, 6, 15, 0.45) 100%);">
+              <div>
+                <div class="k-icon-pill" style="background: rgba(168, 85, 247, 0.05); border-color: rgba(168, 85, 247, 0.2);">🛡️</div>
+                <h4 class="mt-4" style="font-size: 18px; margin-bottom: 0.75rem;">Our Mission</h4>
+                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+                  To empower businesses and individuals through innovative technology, intelligent automation, and scalable digital solutions that accelerate growth and build lasting digital success.
+                </p>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--accent-glow); letter-spacing: 1.5px; margin-top: 2rem;">
+                // MISSION_CORE_DIRECTIVE
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Vision (Col Span 1) -->
+          <div class="col-span-1">
+            <div class="k-card bento-card" style="background: linear-gradient(180deg, rgba(0, 242, 254, 0.04) 0%, rgba(4, 6, 15, 0.45) 100%);">
+              <div>
+                <div class="k-icon-pill" style="background: rgba(0, 242, 254, 0.05); border-color: rgba(0, 242, 254, 0.2);">🎯</div>
+                <h4 class="mt-4" style="font-size: 18px; margin-bottom: 0.75rem;">Our Vision</h4>
+                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
+                  To become a globally recognized technology partner known for innovation, engineering excellence, reliability, customer success, and transformative digital experiences.
+                </p>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--accent-secondary); letter-spacing: 1.5px; margin-top: 2rem;">
+                // GLOBAL_VISION_METRICS
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Business Value (Col Span 2) -->
+          <div class="col-span-2">
+            <div class="k-card bento-card">
+              <div>
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                  <div class="k-icon-pill" style="background: rgba(0, 242, 254, 0.05); border-color: rgba(0, 242, 254, 0.2);">📈</div>
+                  <span class="k-pill active" style="font-size: 11px;">VAL.COMMERCIAL</span>
+                </div>
+                <h4 style="font-size: 20px; margin-bottom: 0.75rem;">Business-Focused Delivery</h4>
+                <p style="color: var(--text-secondary); font-size: 14.5px; line-height: 1.7;">
+                  We align technical implementations directly with your strategic commercial indicators. We build systems that reduce overhead, optimize resource allocation, and open up reliable pipelines for business growth.
+                </p>
+              </div>
+              <div class="mt-4 pt-3">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div style="background: rgba(255, 255, 255, 0.01); padding: 1rem; border-radius: 16px; border: 1px solid var(--border-glass);">
+                      <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Operational Speed</div>
+                      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 0.25rem;">Accelerated workflows</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div style="background: rgba(255, 255, 255, 0.01); padding: 1rem; border-radius: 16px; border: 1px solid var(--border-glass);">
+                      <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Resource Savings</div>
+                      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 0.25rem;">Decreased manual hours</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div style="background: rgba(255, 255, 255, 0.01); padding: 1rem; border-radius: 16px; border: 1px solid var(--border-glass);">
+                      <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Agile Scaling</div>
+                      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 0.25rem;">Scale-out architecture</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: WHAT WE DO (Services Matrix) -->
+    <section id="services" class="section" style="border-top: 1px solid var(--border-glass); background: rgba(3, 4, 10, 0.45);">
+      <div class="container" style="max-width: 1120px;">
+        
+        <div class="row align-items-end mb-5 pb-3">
+          <div class="col-lg-7">
+            <div class="k-badge mb-2">Core Competencies</div>
+            <h3 class="text-reveal-target" style="font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.03em;">Capabilities &amp; Core Services</h3>
+            <p class="k-subtitle mt-2" style="font-size: 15px;">Engineered to automate bottlenecks, build high-performance products, and cut manual drag.</p>
+          </div>
+        </div>
+
+        <!-- High-Clarity Structured Grid showing services clearly to business clients -->
+        <div class="row g-4">
+          
+          <!-- Service Card 1 -->
+          <div class="col-12 col-lg-6">
+            <div class="k-card p-5 h-100 d-flex flex-column justify-content-between" style="border-color: rgba(99, 102, 241, 0.15);">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="service-icon-box" style="font-size: 2.2rem;">💻</span>
+                    <div>
+                      <h4 class="m-0" style="font-size: 20px; font-family: var(--font-display);">Enterprise Software Engineering</h4>
+                      <p class="m-0" style="font-size: 11px; color: var(--accent-secondary); font-family: var(--font-mono); text-transform: uppercase;">Custom Application Development</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;" class="mb-4">
+                  We design, code, and deploy custom business software, workflow controllers, internal management portals, and modern database backends optimized for scale and security.
+                </p>
+
+                <!-- Clear lists of Deliverables -->
+                <div class="mb-4">
+                  <div style="font-size: 11px; color: var(--text-primary); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 0.5px;" class="mb-2">// Key Deliverables</div>
+                  <ul class="m-0 p-0 ps-3" style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Custom CRM, ERP, and Workflow Management Systems</li>
+                    <li>Legacy software modernization &amp; database refactoring</li>
+                    <li>Highly secure, high-concurrency API backends</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Clear Commercial ROI Metric block for business customers -->
+              <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div>
+                  <div style="font-size: 10px; color: #a5b4fc; text-transform: uppercase; font-family: var(--font-mono);">Client ROI Impact</div>
+                  <div style="font-size: 13px; color: var(--text-primary); font-weight: 600; margin-top: 0.25rem;">Cuts operational overhead</div>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--accent-secondary);">-45%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="col-12 col-lg-6">
+            <div class="k-card p-5 h-100 d-flex flex-column justify-content-between" style="border-color: rgba(0, 242, 254, 0.15);">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="service-icon-box" style="font-size: 2.2rem;">🌐</span>
+                    <div>
+                      <h4 class="m-0" style="font-size: 20px; font-family: var(--font-display);">Modern Web Architectures</h4>
+                      <p class="m-0" style="font-size: 11px; color: var(--accent-secondary); font-family: var(--font-mono); text-transform: uppercase;">High-Performance Web Products</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;" class="mb-4">
+                  We build blazing fast, responsive websites, e-commerce storefronts, and cloud-hosted web portals utilizing modern SSR frameworks (Next.js/React) for optimal search indexing (SEO) and load speed.
+                </p>
+
+                <!-- Clear lists of Deliverables -->
+                <div class="mb-4">
+                  <div style="font-size: 11px; color: var(--text-primary); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 0.5px;" class="mb-2">// Key Deliverables</div>
+                  <ul class="m-0 p-0 ps-3" style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>High-converting SaaS landing pages and corporate sites</li>
+                    <li>Full-scale Headless E-Commerce development</li>
+                    <li>Search Engine Optimization (SEO) &amp; speed audits</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Clear Commercial ROI Metric block for business customers -->
+              <div style="background: rgba(0, 242, 254, 0.03); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div>
+                  <div style="font-size: 10px; color: #a5f3fc; text-transform: uppercase; font-family: var(--font-mono);">Client ROI Impact</div>
+                  <div style="font-size: 13px; color: var(--text-primary); font-weight: 600; margin-top: 0.25rem;">Improves SEO page conversions</div>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--accent-secondary);">+30%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="col-12 col-lg-6">
+            <div class="k-card p-5 h-100 d-flex flex-column justify-content-between" style="border-color: rgba(168, 85, 247, 0.15);">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="service-icon-box" style="font-size: 2.2rem;">🤖</span>
+                    <div>
+                      <h4 class="m-0" style="font-size: 20px; font-family: var(--font-display);">AI &amp; Workflow Automation</h4>
+                      <p class="m-0" style="font-size: 11px; color: var(--accent-secondary); font-family: var(--font-mono); text-transform: uppercase;">Hyper-automation &amp; Intelligent Agents</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;" class="mb-4">
+                  We engineer intelligent AI-powered agents, custom LLM integrations, background automation workers, and Office scripts that automate complex task reasoning, report generation, and system operations.
+                </p>
+
+                <!-- Clear lists of Deliverables -->
+                <div class="mb-4">
+                  <div style="font-size: 11px; color: var(--text-primary); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 0.5px;" class="mb-2">// Key Deliverables</div>
+                  <ul class="m-0 p-0 ps-3" style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Custom AI Agents &amp; LLM (OpenAI/Claude) API integrations</li>
+                    <li>Cognitive document processing, PDF parsing, &amp; auto-emails</li>
+                    <li>Cross-system background automation &amp; data syncing flows</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Clear Commercial ROI Metric block for business customers -->
+              <div style="background: rgba(168, 85, 247, 0.03); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div>
+                  <div style="font-size: 10px; color: #f3e8ff; text-transform: uppercase; font-family: var(--font-mono);">Client ROI Impact</div>
+                  <div style="font-size: 13px; color: var(--text-primary); font-weight: 600; margin-top: 0.25rem;">Eliminates manual task loops</div>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--accent-secondary);">80%+</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="col-12 col-lg-6">
+            <div class="k-card p-5 h-100 d-flex flex-column justify-content-between" style="border-color: rgba(99, 102, 241, 0.15);">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="service-icon-box" style="font-size: 2.2rem;">📊</span>
+                    <div>
+                      <h4 class="m-0" style="font-size: 20px; font-family: var(--font-display);">Decision Intelligence &amp; BI</h4>
+                      <p class="m-0" style="font-size: 11px; color: var(--accent-secondary); font-family: var(--font-mono); text-transform: uppercase;">AI Analytics &amp; Data Pipelines</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;" class="mb-4">
+                  We deploy automated data pipelines, build predictive AI data engines, and construct interactive BI dashboards that offer real-time telemetry and predictive decision intelligence for executives.
+                </p>
+
+                <!-- Clear lists of Deliverables -->
+                <div class="mb-4">
+                  <div style="font-size: 11px; color: var(--text-primary); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 0.5px;" class="mb-2">// Key Deliverables</div>
+                  <ul class="m-0 p-0 ps-3" style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Real-time ETL pipelines &amp; automated data validation</li>
+                    <li>Predictive analytics &amp; anomaly detection models</li>
+                    <li>Executive BI Dashboards (Power BI, custom WebGL panels)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Clear Commercial ROI Metric block for business customers -->
+              <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 20px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div>
+                  <div style="font-size: 10px; color: #a5b4fc; text-transform: uppercase; font-family: var(--font-mono);">Client ROI Impact</div>
+                  <div style="font-size: 13px; color: var(--text-primary); font-weight: 600; margin-top: 0.25rem;">Executive decision visibility</div>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--accent-secondary);">100%</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Infrastructure & Support Bento Block -->
+        <div class="row g-4 mt-4">
+          
+          <div class="col-12 col-md-4">
+            <div class="k-card p-4 h-100 d-flex flex-column justify-content-between" style="background: rgba(4,6,15,0.45);">
+              <div>
+                <h4 style="font-size: 16px; font-weight: 600;" class="mb-2">☁️ Cloud &amp; Deployments</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                  Setup secure, load-balanced container hosts (Docker/Kubernetes), secure cloud networking, SSL/TLS certificates, and automated backup nodes.
+                </p>
+              </div>
+              <div class="mt-4 d-flex flex-wrap gap-1">
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">Docker</span>
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">Security</span>
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">Backups</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="k-card p-4 h-100 d-flex flex-column justify-content-between" style="background: rgba(4,6,15,0.45);">
+              <div>
+                <h4 style="font-size: 16px; font-weight: 600;" class="mb-2">🔗 API &amp; Integrations</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                  Connect CRM, ERP databases, payment processors, automatic e-mail marketing campaigns, and analytical tracking code systems together.
+                </p>
+              </div>
+              <div class="mt-4 d-flex flex-wrap gap-1">
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">REST API</span>
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">Webhooks</span>
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">OAuth 2.0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="k-card p-4 h-100 d-flex flex-column justify-content-between" style="background: rgba(4,6,15,0.45);">
+              <div>
+                <h4 style="font-size: 16px; font-weight: 600;" class="mb-2">🛠️ Continuous Maintenance</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                  Active production support agreements, performance speed patches, database tuning, security updates, and bug fixes.
+                </p>
+              </div>
+              <div class="mt-4 d-flex flex-wrap gap-1">
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">SLA Support</span>
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">Database Tuning</span>
+                <span class="k-pill" style="font-size: 9px; padding: 0.3rem 0.6rem;">Fixes</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tertiary Services Row -->
+        <div class="row g-4 mt-3">
+          
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="k-card p-4 p-md-5 h-100" style="background: rgba(4,6,15,0.45);">
+              <h4 style="font-size: 15px; font-weight: 600;" class="mb-2">📚 Documentation Services</h4>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                Writing thorough, beautiful API and user documentation, runbooks, SOPs, and employee onboarding manuals.
+              </p>
+              <div class="d-flex flex-wrap gap-1">
+                <span class="k-pill" style="font-size: 9px;">Redoc/Swagger</span>
+                <span class="k-pill" style="font-size: 9px;">Gitbook</span>
+                <span class="k-pill" style="font-size: 9px;">Developer Guides</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="k-card p-4 p-md-5 h-100" style="background: rgba(4,6,15,0.45);">
+              <h4 style="font-size: 15px; font-weight: 600;" class="mb-2">🎯 Professional Solutions</h4>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                Custom portfolio architecture, interactive web-resumes, personal branding setups, and LinkedIn optimization guides.
+              </p>
+              <div class="d-flex flex-wrap gap-1">
+                <span class="k-pill" style="font-size: 9px;">Personal Branding</span>
+                <span class="k-pill" style="font-size: 9px;">Portfolios</span>
+                <span class="k-pill" style="font-size: 9px;">Resume Design</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="k-card p-4 p-md-5 h-100" style="background: rgba(4,6,15,0.45);">
+              <h4 style="font-size: 15px; font-weight: 600;" class="mb-2">🎵 Media &amp; Audio Production</h4>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                Custom background tracks, podcasts intros, branding melodies, and royalty-free soundtracks.
+              </p>
+              <div class="d-flex flex-wrap gap-1">
+                <span class="k-pill" style="font-size: 9px;">Audio Branding</span>
+                <span class="k-pill" style="font-size: 9px;">Intros</span>
+                <span class="k-pill" style="font-size: 9px;">Royalty-Free</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: TECH STACK (Interactive search/filter chip stack) -->
+    <section class="section" aria-label="Technologies and industries" style="border-top: 1px solid var(--border-glass);">
+      <div class="container" style="max-width: 1120px;">
+        <div class="row g-5">
+          
+          <!-- Column 1: Tech Stack with Filter -->
+          <div class="col-12 col-lg-7">
+            <div class="k-card p-5 h-100">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-4 mb-4">
+                <div>
+                  <h3 style="font-size: 20px; letter-spacing: -0.2px; margin: 0;">Our Tech Stack</h3>
+                  <p class="m-0" style="color: var(--text-secondary); font-size: 12px; margin-top: 0.25rem;">Click filters below to highlight active technologies.</p>
+                </div>
+                <!-- Filters -->
+                <div class="d-flex gap-1 flex-wrap">
+                  <button class="btn k-btn active py-1 px-2" style="font-size: 11px; border-radius: 8px;" onclick="filterTech('all', this)">All</button>
+                  <button class="btn k-btn py-1 px-2" style="font-size: 11px; border-radius: 8px;" onclick="filterTech('lang', this)">Languages</button>
+                  <button class="btn k-btn py-1 px-2" style="font-size: 11px; border-radius: 8px;" onclick="filterTech('db', this)">Database</button>
+                  <button class="btn k-btn py-1 px-2" style="font-size: 11px; border-radius: 8px;" onclick="filterTech('cloud', this)">Cloud &amp; OS</button>
+                </div>
+              </div>
+
+              <!-- Tech Chips -->
+              <div class="d-flex flex-wrap gap-2 pt-2" id="tech-container">
+                <span class="k-pill active" data-cat="lang" style="--glow-color: rgba(99, 102, 241, 0.45);">Python</span>
+                <span class="k-pill active" data-cat="lang" style="--glow-color: rgba(99, 102, 241, 0.45);">Java</span>
+                <span class="k-pill active" data-cat="lang" style="--glow-color: rgba(99, 102, 241, 0.45);">JavaScript</span>
+                <span class="k-pill active" data-cat="lang" style="--glow-color: rgba(99, 102, 241, 0.45);">HTML5</span>
+                <span class="k-pill active" data-cat="lang" style="--glow-color: rgba(99, 102, 241, 0.45);">CSS3</span>
+                <span class="k-pill active" data-cat="db" style="--glow-color: rgba(0, 242, 254, 0.45);">SQL</span>
+                <span class="k-pill active" data-cat="db" style="--glow-color: rgba(0, 242, 254, 0.45);">MySQL</span>
+                <span class="k-pill active" data-cat="db" style="--glow-color: rgba(0, 242, 254, 0.45);">PostgreSQL</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">REST APIs</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">Cloud Platforms</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">Automation Frameworks</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">Git</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">Linux</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">Windows Server</span>
+                <span class="k-pill active" data-cat="cloud" style="--glow-color: rgba(168, 85, 247, 0.45);">Power Automate</span>
+                <span class="k-pill active" data-cat="db" style="--glow-color: rgba(0, 242, 254, 0.45);">Data Analytics</span>
+                <span class="k-pill active" data-cat="db" style="--glow-color: rgba(0, 242, 254, 0.45);">BI Platforms</span>
+                <span class="k-pill active" data-cat="lang" style="--glow-color: rgba(99, 102, 241, 0.45);">NextJS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Industries We Serve -->
+          <div class="col-12 col-lg-5">
+            <div class="k-card p-5 h-100">
+              <h3 style="font-size: 20px; letter-spacing: -0.2px; margin-bottom: 0.75rem;">Industries We Serve</h3>
+              <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.7; margin-bottom: 2rem;">
+                Providing specialized technology and optimization strategies for modern business models.
+              </p>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="k-pill">Technology &amp; SaaS</span>
+                <span class="k-pill">Healthcare</span>
+                <span class="k-pill">Education Tech</span>
+                <span class="k-pill">Fintech</span>
+                <span class="k-pill">Retail &amp; E-Commerce</span>
+                <span class="k-pill">Logistics</span>
+                <span class="k-pill">Manufacturing</span>
+                <span class="k-pill">Professional Services</span>
+                <span class="k-pill">Startups</span>
+                <span class="k-pill">Content Creators</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: WORKSPACE SHOWCASE (Inspired by FluxPad Showcase) -->
+    <section class="section showcase" style="border-top: 1px solid var(--border-glass); background: rgba(17, 22, 37, 0.25);">
+      <div class="container" style="max-width: 1120px;">
+        <div class="row g-5 align-items-center">
+          
+          <div class="col-12 col-lg-6">
+            <div class="k-badge mb-3">WORKSPACE DESIGN</div>
+            <h2 style="font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.25rem;">
+              Sleek workspaces that accelerate execution
+            </h2>
+            <p class="k-subtitle mb-4" style="max-width: 50ch; font-size: clamp(15px, 2vw, 17px); color: var(--text-secondary);">
+              We design and construct clean, custom digital dashboards. Minimize clutter, optimize information density, and keep your engineering processes operating at maximum transparency.
+            </p>
+
+            <div style="display: grid; gap: 0.85rem; margin-bottom: 2rem; color: var(--text-primary); font-weight: 500; font-size: 14px;">
+              <div>✓ Structured bento grid UI containers</div>
+              <div>✓ High-performance, lightweight rendering systems</div>
+              <div>✓ Complete workflow tracking and telemetry readouts</div>
+            </div>
+
+            <a href="#contact" class="btn k-btn k-btn-primary">
+              Start Project
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="k-card" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--border-line); box-shadow: var(--shadow-premium);">
+              <img src="images/showcase.png" alt="KyroCore Workspace Dashboard Showcase" style="width: 100%; height: auto; display: block;" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: OUR APPROACH (Connected workflow) -->
+    <section id="mission" class="section" style="border-top: 1px solid var(--border-glass);">
+      <div class="container" style="max-width: 1120px;">
+        <div class="row g-5 align-items-stretch">
+          
+          <!-- Column 1: Approach vertical connecting dots -->
+          <div class="col-12 col-lg-6">
+            <div class="k-card p-5 h-100">
+              <div class="mb-5">
+                <div class="k-badge mb-2">Workflow</div>
+                <h3 style="font-size: 22px; margin: 0;">Our Delivery Method</h3>
+                <p class="m-0" style="color: var(--text-secondary); font-size: 13px; margin-top: 0.25rem;">A structured roadmap to build high-performance products.</p>
+              </div>
+
+              <div class="timeline-track">
+                
+                <div class="timeline-step active" data-step="1">
+                  <div class="timeline-step-circle">1</div>
+                  <div class="timeline-step-content">
+                    <h4 class="timeline-step-title">Discover</h4>
+                    <p class="timeline-step-desc">Analyzing parameters, metrics, constraints, and business goals.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-step" data-step="2">
+                  <div class="timeline-step-circle">2</div>
+                  <div class="timeline-step-content">
+                    <h4 class="timeline-step-title">Design</h4>
+                    <p class="timeline-step-desc">Structuring architecture diagrams and high fidelity code blueprints.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-step" data-step="3">
+                  <div class="timeline-step-circle">3</div>
+                  <div class="timeline-step-content">
+                    <h4 class="timeline-step-title">Develop</h4>
+                    <p class="timeline-step-desc">Clean implementation using git-flow, code review, and lint validations.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-step" data-step="4">
+                  <div class="timeline-step-circle">4</div>
+                  <div class="timeline-step-content">
+                    <h4 class="timeline-step-title">Deploy</h4>
+                    <p class="timeline-step-desc">Continuous deployment setup using container workflows and SSL checks.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-step" data-step="5">
+                  <div class="timeline-step-circle">5</div>
+                  <div class="timeline-step-content">
+                    <h4 class="timeline-step-title">Support</h4>
+                    <p class="timeline-step-desc">Continual telemetry audits, patches, upgrades, and support agreements.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Interactive Delivery Console -->
+          <div class="col-12 col-lg-6">
+            <div class="k-card p-5 h-100 d-flex flex-column justify-content-between" style="border-color: rgba(0, 242, 254, 0.2);" id="delivery-console">
+              <div>
+                
+                <div class="mb-4 d-flex justify-content-between align-items-start flex-wrap gap-3">
+                  <div>
+                    <div class="k-badge mb-2" id="console-phase-badge" style="background: rgba(0, 242, 254, 0.05); border-color: rgba(0, 242, 254, 0.25); color: #93c5fd;">PHASE_01 // INGESTION</div>
+                    <h3 id="console-title" style="font-size: 22px; margin: 0; font-family: var(--font-sans); font-weight: 700;">Discover Phase</h3>
+                    <p id="console-subtitle" class="m-0" style="color: var(--text-secondary); font-size: 13px; margin-top: 0.25rem; line-height: 1.5;">Analyzing system parameters, metrics, constraints, and business goals.</p>
+                  </div>
+                  
+                  <!-- Blinking Status Badge -->
+                  <div class="d-flex align-items-center gap-2" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 0.35rem 0.7rem;">
+                    <span style="display:inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10B981; animation: activePulse 1.5s infinite;"></span>
+                    <span id="console-status" style="font-family: var(--font-mono); font-size: 9px; color: #34d399; font-weight: 700; letter-spacing: 0.5px;">COMPLETE</span>
+                  </div>
+                </div>
+
+                <!-- Progress Meter -->
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between align-items-center mb-1" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);">
+                    <span>EXECUTION METRIC</span>
+                    <span id="console-progress-text">100%</span>
+                  </div>
+                  <div style="height: 4px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; border: 1px solid var(--border-glass);">
+                    <div id="console-progress-bar" style="width: 100%; height: 100%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div id="console-dynamic-area">
+                  
+                  <!-- Checklist (For Steps 2, 3, 4, 5) -->
+                  <ul id="console-checklist" style="margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem;">
+                    <!-- Dynamically populated checklist items -->
+                  </ul>
+
+                  <!-- System Foundation Audit Grid (For Step 1 Discover) -->
+                  <div id="console-audit-system" style="display: none;">
+                    <div style="font-size: 10px; color: var(--text-secondary); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem;">// Foundation Readiness Scores</div>
+                    <div class="d-flex flex-wrap gap-2 mb-3" id="audit-pills-container">
+                      <!-- Populated dynamically via JS -->
+                    </div>
+                    
+                    <!-- Audit Sub-panel details -->
+                    <div id="audit-detail-panel" class="p-3" style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-glass); border-radius: 12px; min-height: 160px; font-family: var(--font-sans);">
+                      <div class="d-flex align-items-center gap-2 mb-2">
+                        <span id="audit-detail-icon" style="font-size: 1.2rem;">💻</span>
+                        <h4 id="audit-detail-title" style="font-size: 14px; font-weight: 700; margin: 0;">Software Development</h4>
+                        <span id="audit-detail-score" class="k-badge" style="font-size: 9px; padding: 0.2rem 0.5rem; background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25); color: #34d399; margin-left: auto; font-family: var(--font-mono);">98% READY</span>
+                      </div>
+                      <p id="audit-detail-subtitle" style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; margin-bottom: 0.75rem;">Building intelligent software solutions...</p>
+                      
+                      <div class="row g-3">
+                        <div class="col-6">
+                          <div style="font-size: 9px; color: var(--text-secondary); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.35rem;">Core Services</div>
+                          <ul id="audit-detail-services" style="font-size: 11px; color: var(--text-primary); margin: 0; padding-left: 1rem; line-height: 1.5; font-family: var(--font-sans);">
+                            <!-- Services -->
+                          </ul>
+                        </div>
+                        <div class="col-6">
+                          <div style="font-size: 9px; color: var(--text-secondary); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.35rem;">Benefits</div>
+                          <ul id="audit-detail-benefits" style="font-size: 11px; color: var(--text-primary); margin: 0; padding-left: 1rem; line-height: 1.5; list-style-type: '✓ '; font-family: var(--font-sans);">
+                            <!-- Benefits -->
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Live Simulator Log Output -->
+              <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-glass);">
+                <div class="p-3" style="background: rgba(3, 4, 10, 0.7); border: 1px solid var(--border-glass); border-radius: 12px; font-family: var(--font-mono); font-size: 11px;">
+                  <div style="color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 9px; letter-spacing: 1px;">Console logs:</div>
+                  <div id="console-log-lines" style="color: var(--accent-secondary); line-height: 1.5; min-height: 50px;">
+                    <!-- Dynamically populated logs -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: MEET THE FOUNDER (Detailed Profile) -->
+    <section class="section" id="founder" style="border-top: 1px solid var(--border-glass);">
+      <div class="container" style="max-width: 1120px;">
+        
+        <div class="k-card p-4 p-md-4" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.02) 0%, rgba(4, 6, 15, 0.5) 100%);">
+          <div class="row g-4 align-items-center">
+            
+            <!-- Bio text -->
+            <div class="col-12 col-lg-7 order-2 order-lg-1">
+              <div class="k-badge mb-2">Leadership</div>
+              <h3 class="text-reveal-target mb-2" style="font-size: clamp(22px, 3vw, 28px); letter-spacing: -0.03em;">Meet The Founder</h3>
+              <h4 style="font-size: 14.5px; color: var(--accent-secondary); font-weight: 600;" class="mb-3">
+                YUVARAJ RAMASAMY — Founder &amp; Chief Executive Officer
+              </h4>
+              
+              <div id="founder-bio-text" style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; min-height: 130px;">
+                <p class="mb-3">
+                  Yuvaraj Ramasamy founded KyroCore Technologies with a clear directive: to construct premium engineering solutions that bridge the gap between complex organizational challenges and modern development frameworks.
+                </p>
+                <p class="mb-3">
+                  His multidisciplinary engineering profile spans custom software design, database optimizations, container cloud infrastructure, workflow scripts, personal brand design, and background audio production.
+                </p>
+              </div>
+
+              <!-- Quote styled in Cinematic Intro Credits format -->
+              <div class="cinematic-quote mt-3">
+                Technology is most powerful when it simplifies complexity, accelerates innovation, and empowers people to achieve more.
+              </div>
+            </div>
+
+            <!-- Profile image block -->
+            <div class="col-12 col-lg-5 order-1 order-lg-2 text-center">
+              <div style="display: inline-block; position: relative;">
+                
+                <!-- HUD corner decorations on picture -->
+                <div class="hud-corner hud-tl" style="width: 14px; height: 14px; border-width: 2px 0 0 2px; top: -8px; left: -8px;"></div>
+                <div class="hud-corner hud-tr" style="width: 14px; height: 14px; border-width: 2px 2px 0 0; top: -8px; right: -8px;"></div>
+                <div class="hud-corner hud-bl" style="width: 14px; height: 14px; border-width: 0 0 2px 2px; bottom: -8px; left: -8px;"></div>
+                <div class="hud-corner hud-br" style="width: 14px; height: 14px; border-width: 0 2px 2px 0; bottom: -8px; right: -8px;"></div>
+                
+                <!-- Main frame (larger size) -->
+                <div style="width: 260px; height: 260px; border-radius: 22px; overflow: hidden; border: 1px solid var(--border-glass-hover); box-shadow: var(--shadow-premium); background: rgba(0, 0, 0, 0.3);">
+                  <img src="images/profile.png" alt="Yuvaraj Ramasamy" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+
+                <!-- Small floaters -->
+                <div class="k-card p-2 animate-float" style="position: absolute; bottom: 10px; left: -15px; font-size: 11px; background: rgba(2, 3, 8, 0.85); display: flex; align-items: center; gap: 0.5rem; border-radius: 10px;">
+                  <span style="font-size: 14px;">🛠️</span>
+                  <span style="font-family: var(--font-mono); font-weight: 500;">Full-Stack dev</span>
+                </div>
+
+                <div class="k-card p-2 animate-float" style="position: absolute; bottom: -15px; right: -10px; font-size: 11px; background: rgba(2, 3, 8, 0.85); display: flex; align-items: center; gap: 0.5rem; border-radius: 10px; animation-delay: -2.5s;">
+                  <span style="font-size: 14px;">🎵</span>
+                  <span style="font-family: var(--font-mono); font-weight: 500;">Audio Producer</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT & INTERACTIVE PROPOSAL -->
+    <section id="contact" class="section" style="border-top: 1px solid var(--border-glass); background: radial-gradient(800px 400px at 50% 100%, rgba(0, 242, 254, 0.05), transparent 70%);">
+      <div class="container" style="max-width: 1120px;">
+        
+        <div class="k-card p-5 p-md-5" style="border-color: rgba(0, 242, 254, 0.15);">
+          <div class="row g-5">
+            
+            <!-- Left Info column -->
+            <div class="col-12 col-lg-6">
+              <div class="k-badge mb-3">Get Started</div>
+              <h3 class="text-reveal-target mb-3" style="font-size: clamp(28px, 4vw, 36px); letter-spacing: -0.04em;">
+                Let's build the<br/>
+                <span class="k-gradient-text">future together</span>
+              </h3>
+              <p class="k-subtitle mb-4" style="font-size: 14.5px; max-width: 48ch;">
+                Whether you need to scale custom business systems, automate manual operations, build responsive web products, or configure secure cloud deployments — KyroCore is ready to engineer your core.
+              </p>
+
+              <div class="mt-5 pt-4" style="border-top: 1px solid var(--border-glass);">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="indicator-glow" style="width: 10px; height: 10px; border-radius: 50%; background: var(--accent-secondary); box-shadow: 0 0 10px var(--accent-secondary); animation: activePulse 2s infinite;"></div>
+                  <div style="font-size: 12px; color: var(--text-secondary); font-family: var(--font-mono); letter-spacing: 0.5px;">
+                    AVAILABLE FOR SECURE PROPOSALS // SECURE_SOCKET_ONLINE
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Form column (Interactive Estimator) -->
+            <div class="col-12 col-lg-6">
+              <div class="p-4 p-md-5 rounded-4 h-100 d-flex flex-column justify-content-between" style="background: rgba(2, 3, 8, 0.5); border: 1px solid var(--border-glass);" id="interactive-briefcase">
+                
+                <div>
+                  <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.5px; font-family: var(--font-sans);" class="k-gradient-text">Interactive Project Estimator</h4>
+                  
+                  <!-- Chips for Service Category -->
+                  <div class="mb-4">
+                    <label class="form-label mb-2" style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 1px;">1. Select Project Domain</label>
+                    <div class="choice-chips-container" id="brief-services">
+                      <div class="choice-chip active" data-val="Software">Software Dev</div>
+                      <div class="choice-chip" data-val="Web">Web Dev</div>
+                      <div class="choice-chip" data-val="Automation">Automation</div>
+                      <div class="choice-chip" data-val="Data">Data Services</div>
+                      <div class="choice-chip" data-val="Cloud">Cloud Setup</div>
+                      <div class="choice-chip" data-val="API">API &amp; Sync</div>
+                      <div class="choice-chip" data-val="Support">Support</div>
+                      <div class="choice-chip" data-val="Docs">Docs &amp; Guides</div>
+                      <div class="choice-chip" data-val="Professional">Pro Branding</div>
+                      <div class="choice-chip" data-val="Audio">Audio Scores</div>
+                    </div>
+                  </div>
+
+                  <!-- Chips for Scale / Scope -->
+                  <div class="mb-4">
+                    <label class="form-label mb-2" style="font-size: 10px; color: var(--text-secondary); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 1px;">2. Project Scale</label>
+                    <div class="choice-chips-container" id="brief-scale">
+                      <div class="choice-chip active" data-val="MVP">Quick MVP</div>
+                      <div class="choice-chip" data-val="Standard">Standard Scale</div>
+                      <div class="choice-chip" data-val="Enterprise">Enterprise Core</div>
+                    </div>
+                  </div>
+
+                  <!-- Dynamic Output Screen -->
+                  <div class="estimator-summary mb-4">
+                    <div class="estimator-summary-title">// Live Proposal Specs</div>
+                    
+                    <div class="mb-3">
+                      <div class="estimator-label">KEY SERVICE FOCUS</div>
+                      <div id="brief-out-stack" class="estimator-stack-value mt-1">Custom Application Architecture / Database Design / Responsive UI</div>
+                    </div>
+                    
+                    <div>
+                      <div class="estimator-label mb-2">KEY DELIVERABLES</div>
+                      <ul id="brief-out-deliverables" style="font-size: 12.5px; color: var(--text-primary); padding-left: 1rem; margin: 0; line-height: 1.6;">
+                        <!-- Updated dynamically -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Options -->
+                <div>
+                  <a class="btn k-btn k-btn-primary w-100 py-3 d-inline-flex align-items-center justify-content-center gap-2" id="btn-email-link" href="mailto:kyrocoretechnologies@gmail.com?subject=Project%20Inquiry%20-%20KyroCore" style="font-size: 13px; border-radius: 12px; font-weight: 700;">
+                    ✉️ Email Us Your Proposal
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-topline">
+    <div class="container" style="max-width: 1120px; padding-top: 4.5rem; padding-bottom: 5rem;">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
+        
+        <div>
+          <div class="d-flex align-items-center gap-2">
+            <span style="font-weight: 800; font-size: 15px; letter-spacing: 0.5px; font-family: var(--font-display);">KYROCORE TECHNOLOGIES</span>
+            <div style="display: inline-flex; align-items: center; gap: 0.25rem; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); padding: 0.25rem 0.65rem; border-radius: 6px;">
+              <span style="display:inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-secondary); animation: activePulse 2s infinite;"></span>
+              <span style="font-size: 8.5px; color: var(--accent-secondary); font-family: var(--font-mono); font-weight: 700;">SYSTEMS_OPERATIONAL</span>
+            </div>
+          </div>
+          <div class="small mt-2" style="color: var(--text-secondary); font-size: 12px; line-height: 1.6;">
+            Innovating. Automating. Transforming. Engineering Tomorrow's Digital Core.
+          </div>
+          <div class="d-flex flex-column gap-1 mt-3" style="font-size: 12px; color: var(--text-secondary);">
+            <div class="d-flex align-items-center gap-2">
+              <span style="color: var(--accent-secondary); font-size: 13px;">✉</span>
+              <a href="mailto:kyrocoretechnologies@gmail.com" style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">kyrocoretechnologies@gmail.com</a>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span style="color: var(--accent-secondary); font-size: 13px;">📍</span>
+              <span>Erode District, Tamil Nadu, India</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 flex-wrap">
+          <a class="k-navlink" href="#who" style="font-size: 12.5px;">Who We Are</a>
+          <a class="k-navlink" href="#services" style="font-size: 12.5px;">What We Do</a>
+          <a class="k-navlink" href="#contact" style="font-size: 12.5px;">Contact</a>
+        </div>
+
+      </div>
+
+      <div class="mt-5 pt-3 d-flex justify-content-between align-items-center flex-wrap gap-2" style="border-top: 1px solid rgba(255,255,255,0.03); font-size: 11px; color: var(--text-secondary); font-family: var(--font-mono);">
+        <div>© <span id="year"></span> KyroCore Technologies. All rights reserved.</div>
+        <div>WebGL core frame rate: lock @ 60 FPS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP, ScrollTrigger & Three.js CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Register GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Current Year Footer Update
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2. Floating Navbar Scroll Styling Trigger
+    window.addEventListener('scroll', () => {
+      const topbar = document.querySelector('.topbar');
+      if (window.scrollY > 50) {
+        topbar.classList.add('topbar-scrolled');
+      } else {
+        topbar.classList.remove('topbar-scrolled');
+      }
+
+      // Sync navigation active class with scroll position
+      const sections = document.querySelectorAll('section[id]');
+      let currentSectionId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        if (window.pageYOffset >= sectionTop) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      const navlinks = document.querySelectorAll('nav .k-navlink');
+      navlinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Simulated Terminal Real-time logs are managed by initTerminalLogs()
+
+    // 4. Interactive Tech Filter Component
+    function filterTech(category, button) {
+      const filterButtons = button.parentElement.querySelectorAll('button');
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const chips = document.querySelectorAll('#tech-container .k-pill');
+      chips.forEach(chip => {
+        const chipCat = chip.getAttribute('data-cat');
+        if (category === 'all' || chipCat === category) {
+          gsap.to(chip, { opacity: 1, scale: 1, duration: 0.3 });
+          chip.classList.add('active');
+          if (category !== 'all') {
+            chip.style.boxShadow = `0 0 15px ${chip.style.getPropertyValue('--glow-color')}`;
+            chip.style.borderColor = 'var(--accent-secondary)';
+          } else {
+            chip.style.boxShadow = 'none';
+            chip.style.borderColor = 'var(--border-glass)';
+          }
+        } else {
+          gsap.to(chip, { opacity: 0.25, scale: 0.95, duration: 0.3 });
+          chip.classList.remove('active');
+          chip.style.boxShadow = 'none';
+          chip.style.borderColor = 'var(--border-glass)';
+        }
+      });
+    }
+
+
+
+    // ==========================================
+    // THREE.JS HIGH-PERFORMANCE 3D SCENE (3D GLOBE)
+    // ==========================================
+    const canvas = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    
+    // Camera Setup
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 7.5;
+
+    // Optimized Renderer
+    const renderer = new THREE.WebGLRenderer({ 
+      canvas: canvas, 
+      alpha: true, 
+      antialias: true,
+      powerPreference: "high-performance" 
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Capped for performance
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Particle Texture Generator (Circular Glowing Points)
+    function createCircleTexture() {
+      const size = 32;
+      const canvasTex = document.createElement('canvas');
+      canvasTex.width = size;
+      canvasTex.height = size;
+      const ctxTex = canvasTex.getContext('2d');
+      const grad = ctxTex.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+      grad.addColorStop(0, 'rgba(255,255,255,1)');
+      grad.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      ctxTex.fillStyle = grad;
+      ctxTex.fillRect(0, 0, size, size);
+      return new THREE.CanvasTexture(canvasTex);
+    }
+    const particleTexture = createCircleTexture();
+
+    // Group for containing all core points
+    const coreGroup = new THREE.Group();
+    scene.add(coreGroup);
+
+    // 1. Single 3D Particle Sphere Core Geometry
+    const count = 1800;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+
+    const colorPrimary = new THREE.Color('#6366F1');   // Indigo
+    const colorSecondary = new THREE.Color('#00F2FE'); // Cyan
+    const colorPurple = new THREE.Color('#A855F7');    // Purple
+
+    for (let i = 0; i < count; i++) {
+      // Golden spiral distribution on sphere for structural points
+      const phi = Math.acos(-1 + (2 * i) / count);
+      const theta = Math.sqrt(count * Math.PI) * phi;
+      
+      // Radius variation to give a thick glowing core shell
+      const r = 2.2 + (Math.random() - 0.5) * 0.4;
+      
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
+
+      // Color blending (cyan, purple, and indigo)
+      let mixedColor;
+      if (Math.random() < 0.4) {
+        mixedColor = colorSecondary.clone().lerp(colorPrimary, Math.random());
+      } else {
+        mixedColor = colorPrimary.clone().lerp(colorPurple, Math.random());
+      }
+      colors[i * 3] = mixedColor.r;
+      colors[i * 3 + 1] = mixedColor.g;
+      colors[i * 3 + 2] = mixedColor.b;
+    }
+
+    const globeGeom = new THREE.BufferGeometry();
+    globeGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    globeGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const globeMaterial = new THREE.PointsMaterial({
+      size: 0.08,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      map: particleTexture
+    });
+
+    const globePoints = new THREE.Points(globeGeom, globeMaterial);
+    coreGroup.add(globePoints);
+
+
+    // ==========================================
+    // INTERACTION & RENDER PHYSICS LOOP
+    // ==========================================
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = (e.clientX - window.innerWidth / 2) * 0.0015;
+      targetMouseY = (e.clientY - window.innerHeight / 2) * 0.0015;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsedTime = clock.getElapsedTime();
+      const time = elapsedTime;
+
+      // Spin globe
+      globePoints.rotation.y = time * 0.08;
+      globePoints.rotation.x = time * 0.03;
+
+      // Globe breathing pulsation
+      const pulse = 1.0 + Math.sin(time * 3.5) * 0.06;
+      globePoints.scale.set(pulse, pulse, pulse);
+
+      // Mouse interactive sways with damping
+      mouseX += (targetMouseX - mouseX) * 0.06;
+      mouseY += (targetMouseY - mouseY) * 0.06;
+
+      coreGroup.rotation.y = mouseX * 0.8;
+      coreGroup.rotation.x = mouseY * 0.8;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Viewport Resizing
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    });
+
+
+    // ==========================================
+    // GSAP SCROLL-DRIVEN CAMERA & GLOBE TIMELINE
+    // ==========================================
+    
+    // Set Initial Position:
+    // Globe Starts on the right side of the screen
+    coreGroup.position.set(2.2, 0, 0);
+    coreGroup.scale.set(1.1, 1.1, 1.1);
+
+    // Master Scroll trigger timeline
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "main",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.5, // High scrub factor for buttery scroll physics
+      }
+    });
+
+    scrollTimeline
+      // --- PHASE 1: Scroll to "Who We Are" ---
+      // Globe shifts left to lead the scroll, behind the bento grid
+      .to(coreGroup.position, { x: -2.0, y: 0.4, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 0)
+      .to(coreGroup.scale, { x: 0.9, y: 0.9, z: 0.9, ease: "power2.inOut", duration: 2.5 }, 0)
+
+      // --- PHASE 2: Scroll to "Services" ---
+      // Globe shifts right to lead behind the services cards
+      .to(coreGroup.position, { x: 2.0, y: -0.4, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 2.5)
+      .to(coreGroup.scale, { x: 1.15, y: 1.15, z: 1.15, ease: "power2.inOut", duration: 2.5 }, 2.5)
+
+      // --- PHASE 3: Scroll to "Approach/Mission" ---
+      // Globe shifts left behind the steps and founder profile
+      .to(coreGroup.position, { x: -1.8, y: 0.2, z: -1.0, ease: "power2.inOut", duration: 2.5 }, 5.0)
+      .to(coreGroup.scale, { x: 0.85, y: 0.85, z: 0.85, ease: "power2.inOut", duration: 2.5 }, 5.0)
+
+      // --- PHASE 4: Scroll to "Contact" (End of Scroll) ---
+      // Globe zooms in massively to center stage, dispersing particles across the viewport
+      .to(coreGroup.position, { x: 0, y: 0, z: 2.5, ease: "power2.inOut", duration: 2.5 }, 7.5)
+      .to(coreGroup.scale, { x: 2.5, y: 2.5, z: 2.5, ease: "power2.inOut", duration: 2.5 }, 7.5);
+
+
+    // ==========================================
+    // CINEMATIC TEXT REVEAL ANIMATIONS
+    // ==========================================
+    function splitTextToSpans(element) {
+      const childNodes = Array.from(element.childNodes);
+      childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent;
+          if (text.trim() === '') return;
+          
+          const fragment = document.createDocumentFragment();
+          const words = text.split(/(\s+)/);
+          
+          words.forEach(word => {
+            if (word.trim() === '') {
+              fragment.appendChild(document.createTextNode(word));
+            } else {
+              const wordSpan = document.createElement('span');
+              wordSpan.className = 'word-wrap';
+              
+              for (let char of word) {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'char-reveal';
+                charSpan.textContent = char;
+                wordSpan.appendChild(charSpan);
+              }
+              fragment.appendChild(wordSpan);
+            }
+          });
+          element.replaceChild(fragment, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.tagName.toLowerCase() === 'br') return;
+          splitTextToSpans(node);
+        }
+      });
+    }
+
+    const revealHeaders = document.querySelectorAll('.text-reveal-target');
+    revealHeaders.forEach(header => {
+      splitTextToSpans(header);
+
+      const chars = header.querySelectorAll('.char-reveal');
+      gsap.fromTo(chars, 
+        { y: "100%", opacity: 0 },
+        { 
+          y: "0%", 
+          opacity: 1, 
+          duration: 0.8, 
+          stagger: 0.02, 
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: header,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    });
+
+
+    // ==========================================
+    // INTERSTELLAR CINEMATIC ORGAN AUDIO SYNTH
+    // ==========================================
+    let audioCtx = null;
+    let masterGain = null;
+    let delayNode = null;
+    let feedbackGain = null;
+    let filterNode = null;
+    let playTimeout = null;
+    let isPlaying = false;
+
+    // Detuned organ chords (Hans Zimmer minor/modal style)
+    const interstellarChords = [
+      [65.41, 130.81, 196.00, 261.63, 329.63, 392.00, 493.88], // Cmaj9 (C2, C3, G3, C4, E4, G4, B4)
+      [55.00, 110.00, 164.81, 220.00, 261.63, 329.63, 440.00], // Am9 (A1, A2, E3, A3, C4, E4, A4)
+      [43.65, 87.31, 130.81, 174.61, 220.00, 261.63, 349.23],  // Fmaj7 (F1, F2, C3, F3, A3, C4, F4)
+      [49.00, 98.00, 146.83, 196.00, 246.94, 293.66, 392.00]   // Gmaj9 (G1, G2, D3, G3, B3, D4, G4)
+    ];
+    let chordIdx = 0;
+
+    const spaceMelody = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33];
+
+    function initAudio() {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+
+      filterNode = audioCtx.createBiquadFilter();
+      filterNode.type = 'lowpass';
+      filterNode.frequency.setValueAtTime(350, audioCtx.currentTime);
+      filterNode.Q.setValueAtTime(2.0, audioCtx.currentTime);
+
+      delayNode = audioCtx.createDelay(2.0);
+      delayNode.delayTime.setValueAtTime(0.8, audioCtx.currentTime);
+      
+      feedbackGain = audioCtx.createGain();
+      feedbackGain.gain.setValueAtTime(0.55, audioCtx.currentTime);
+
+      delayNode.connect(feedbackGain);
+      feedbackGain.connect(delayNode);
+
+      filterNode.connect(masterGain);
+      filterNode.connect(delayNode);
+      delayNode.connect(masterGain);
+      
+      masterGain.connect(audioCtx.destination);
+    }
+
+    function playMelodyNote() {
+      if (!isPlaying) return;
+
+      const now = audioCtx.currentTime;
+      const freq = spaceMelody[Math.floor(Math.random() * spaceMelody.length)];
+      
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const voiceGain = audioCtx.createGain();
+
+      osc1.type = 'sine';
+      osc2.type = 'triangle';
+      
+      osc1.frequency.setValueAtTime(freq - 0.7, now);
+      osc2.frequency.setValueAtTime(freq + 0.7, now);
+
+      voiceGain.gain.setValueAtTime(0, now);
+      voiceGain.gain.linearRampToValueAtTime(0.02, now + 1.2);
+      voiceGain.gain.setValueAtTime(0.02, now + 3.0);
+      voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 5.0);
+
+      osc1.connect(voiceGain);
+      osc2.connect(voiceGain);
+      voiceGain.connect(filterNode);
+
+      osc1.start(now);
+      osc2.start(now);
+      
+      osc1.stop(now + 6.0);
+      osc2.stop(now + 6.0);
+
+      setTimeout(playMelodyNote, 4000 + Math.random() * 4000);
+    }
+
+    function playInterstellarChord() {
+      if (!isPlaying) return;
+
+      const chord = interstellarChords[chordIdx];
+      const now = audioCtx.currentTime;
+      const duration = 8.5;
+
+      filterNode.frequency.cancelScheduledValues(now);
+      filterNode.frequency.setValueAtTime(250, now);
+      filterNode.frequency.exponentialRampToValueAtTime(800, now + duration * 0.45);
+      filterNode.frequency.exponentialRampToValueAtTime(250, now + duration - 0.5);
+
+      chord.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const oscDetune = audioCtx.createOscillator();
+        const voiceGain = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        oscDetune.type = 'triangle';
+
+        osc.frequency.setValueAtTime(freq, now);
+        oscDetune.frequency.setValueAtTime(freq * 1.003 + (Math.random() - 0.5) * 0.2, now);
+
+        voiceGain.gain.setValueAtTime(0, now);
+        const maxGain = idx < 2 ? 0.05 : 0.02;
+        voiceGain.gain.linearRampToValueAtTime(maxGain, now + 3.0 + Math.random() * 0.5); 
+        voiceGain.gain.setValueAtTime(maxGain, now + duration - 2.5);
+        voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+        osc.connect(voiceGain);
+        oscDetune.connect(voiceGain);
+        voiceGain.connect(filterNode);
+
+        osc.start(now);
+        oscDetune.start(now);
+        
+        osc.stop(now + duration);
+        oscDetune.stop(now + duration);
+      });
+
+      chordIdx = (chordIdx + 1) % interstellarChords.length;
+      playTimeout = setTimeout(playInterstellarChord, (duration - 1.0) * 1000);
+    }
+
+    const audioToggleBtn = document.getElementById('audio-toggle');
+    
+    audioToggleBtn.addEventListener('click', () => {
+      if (!audioCtx) initAudio();
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      if (isPlaying) {
+        isPlaying = false;
+        audioToggleBtn.classList.remove('audio-active');
+        clearTimeout(playTimeout);
+        
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
+      } else {
+        isPlaying = true;
+        audioToggleBtn.classList.add('audio-active');
+        
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 2.0);
+        
+        playInterstellarChord();
+        setTimeout(playMelodyNote, 2000);
+      }
+    });
+
+
+
+    // ==========================================
+    // KYROBIZ-STYLE CYBER INTERACTIVE MODULES
+    // ==========================================
+
+    // 1. Lenis Smooth Scrolling Engine
+    let lenis;
+    function initLenis() {
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Link Lenis scroll triggers to GSAP ScrollTrigger updates
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // 2. Interactive Delivery Console Controller
+    const phaseData = {
+      1: {
+        badge: "PHASE_01 // INGESTION",
+        title: "Discover Phase",
+        subtitle: "Analyzing system parameters, metrics, constraints, and business goals.",
+        status: "COMPLETE",
+        statusColor: "#10B981",
+        statusBg: "rgba(16, 185, 129, 0.08)",
+        statusBorder: "rgba(16, 185, 129, 0.25)",
+        progress: "100%",
+        tasks: [
+          { text: "Ingest customer and platform requirements", checked: true },
+          { text: "Define SLOs and critical latency boundaries", checked: true },
+          { text: "Formulate database scale & index constraints", checked: true },
+          { text: "Establish cloud budget limits and redundancy parameters", checked: true }
+        ],
+        logs: [
+          "Ingesting schema configuration... DONE",
+          "SLIs calculated: 99.99% targeted availability.",
+          "Discover parameters loaded into repository."
+        ]
+      },
+      2: {
+        badge: "PHASE_02 // ARCHITECTURE",
+        title: "Design Phase",
+        subtitle: "Structuring architectural diagrams and code blueprints.",
+        status: "OPTIMIZING",
+        statusColor: "#60A5FA",
+        statusBg: "rgba(96, 165, 250, 0.08)",
+        statusBorder: "rgba(96, 165, 250, 0.25)",
+        progress: "85%",
+        tasks: [
+          { text: "Generate high-fidelity Entity Relationship diagrams", checked: true },
+          { text: "Structure API endpoints & JSON payloads specs", checked: true },
+          { text: "Validate zero-trust network topology", checked: true },
+          { text: "Draft responsive Tailwind/CSS layouts mockup", checked: false }
+        ],
+        logs: [
+          "Processing architectural diagram nodes...",
+          "Linting schemas... 0 errors, 1 warning (deprecation).",
+          "Target microservices blueprint generated."
+        ]
+      },
+      3: {
+        badge: "PHASE_03 // CODEBASE",
+        title: "Develop Phase",
+        subtitle: "Clean implementation using git-flow and automated validations.",
+        status: "BUILDING",
+        statusColor: "#F59E0B",
+        statusBg: "rgba(245, 158, 11, 0.08)",
+        statusBorder: "rgba(245, 158, 11, 0.25)",
+        progress: "60%",
+        tasks: [
+          { text: "Scaffold boilerplate microservices in Next.js/Go", checked: true },
+          { text: "Integrate database connections & connection poolers", checked: true },
+          { text: "Code main business logic rules and controllers", checked: false },
+          { text: "Write core unit tests and CI testing pipeline", checked: false }
+        ],
+        logs: [
+          "Compiling Typescript source files...",
+          "Connection pool checks... pool initialized.",
+          "Running local test suite... 14 specs passed."
+        ]
+      },
+      4: {
+        badge: "PHASE_04 // DEPLOYMENT",
+        title: "Deploy Phase",
+        subtitle: "Continuous integration setups and SSL verification.",
+        status: "QUEUED",
+        statusColor: "#A78BFA",
+        statusBg: "rgba(167, 139, 250, 0.08)",
+        statusBorder: "rgba(167, 139, 250, 0.25)",
+        progress: "25%",
+        tasks: [
+          { text: "Configure Dockerfiles with multi-stage build layers", checked: true },
+          { text: "Write secure Kubernetes deployment YAML configs", checked: false },
+          { text: "Provision Let's Encrypt TLS/SSL certificates", checked: false },
+          { text: "Setup Cloudflare CDN distribution nodes", checked: false }
+        ],
+        logs: [
+          "Docker local image compilation success (154 MB).",
+          "Awaiting PR validation for production deployments...",
+          "Webhook deployment listeners active."
+        ]
+      },
+      5: {
+        badge: "PHASE_05 // OVERWATCH",
+        title: "Support Phase",
+        subtitle: "Continual telemetry audits, maintenance, and support.",
+        status: "STANDBY",
+        statusColor: "#9CA3AF",
+        statusBg: "rgba(156, 163, 175, 0.08)",
+        statusBorder: "rgba(156, 163, 175, 0.25)",
+        progress: "0%",
+        tasks: [
+          { text: "Configure Prometheus/Grafana real-time metrics charts", checked: false },
+          { text: "Schedule database incremental backup cronjobs", checked: false },
+          { text: "Open SLA support ticketing channels", checked: false },
+          { text: "Review regular security packages & patch upgrades", checked: false }
+        ],
+        logs: [
+          "SLA ticketing hooks connected.",
+          "Systems metrics stack standing by for launch...",
+          "System idle: awaiting target deployment."
+        ]
+      }
+    };
+
+    function updateConsoleStep(stepNum) {
+      const data = phaseData[stepNum];
+      if (!data) return;
+
+      const badgeEl = document.getElementById('console-phase-badge');
+      const titleEl = document.getElementById('console-title');
+      const subtitleEl = document.getElementById('console-subtitle');
+      const statusBadgeEl = document.getElementById('console-status').parentElement;
+      const statusTextEl = document.getElementById('console-status');
+      const progressTextEl = document.getElementById('console-progress-text');
+      const progressBarEl = document.getElementById('console-progress-bar');
+      const checklistEl = document.getElementById('console-checklist');
+      const auditSystemEl = document.getElementById('console-audit-system');
+      const logLinesEl = document.getElementById('console-log-lines');
+
+      if (!badgeEl || !titleEl || !subtitleEl || !statusBadgeEl || !statusTextEl || !progressTextEl || !progressBarEl || !checklistEl || !auditSystemEl || !logLinesEl) return;
+
+      // Determine elements to fade out
+      const fadeElements = ['#console-phase-badge', '#console-title', '#console-subtitle', '#console-log-lines'];
+      if (stepNum === 1) {
+        fadeElements.push('#console-audit-system');
+      } else {
+        fadeElements.push('#console-checklist');
+      }
+
+      // GSAP animation to fade out content before updating
+      gsap.to(fadeElements, {
+        opacity: 0,
+        y: 6,
+        duration: 0.15,
+        stagger: 0.015,
+        onComplete: () => {
+          // Update text values
+          badgeEl.textContent = data.badge;
+          titleEl.textContent = data.title;
+          subtitleEl.textContent = data.subtitle;
+
+          // Update status badge
+          statusTextEl.textContent = data.status;
+          statusTextEl.style.color = data.statusColor;
+          statusBadgeEl.style.backgroundColor = data.statusBg;
+          statusBadgeEl.style.borderColor = data.statusBorder;
+          statusBadgeEl.querySelector('span').style.backgroundColor = data.statusColor;
+
+          // Update progress
+          progressTextEl.textContent = data.progress;
+          progressBarEl.style.width = data.progress;
+
+          // Toggle visibility of checklist vs audit scorecard
+          if (stepNum === 1) {
+            checklistEl.style.display = 'none';
+            auditSystemEl.style.display = 'block';
+            renderAuditSystem();
+          } else {
+            auditSystemEl.style.display = 'none';
+            checklistEl.style.display = 'grid';
+
+            // Update checklist list
+            checklistEl.innerHTML = data.tasks.map(task => `
+              <li class="d-flex gap-3 align-items-center">
+                <span style="font-family: var(--font-mono); font-size: 10px; color: ${task.checked ? '#10B981' : '#4B5563'}; border: 1px solid ${task.checked ? 'rgba(16, 185, 129, 0.3)' : 'rgba(75, 85, 99, 0.3)'}; padding: 0.2rem 0.5rem; background: ${task.checked ? 'rgba(16, 185, 129, 0.08)' : 'rgba(75, 85, 99, 0.08)'}; border-radius: 6px; font-weight: 700; user-select: none; letter-spacing: 0.5px;">
+                  ${task.checked ? '✓ DONE' : '— PENDING'}
+                </span>
+                <span style="font-size: 13.5px; color: ${task.checked ? 'var(--text-primary)' : 'var(--text-secondary)'}; font-weight: ${task.checked ? '500' : 'normal'};">
+                  ${task.text}
+                </span>
+              </li>
+            `).join('');
+          }
+
+          // Update logs
+          logLinesEl.innerHTML = data.logs.map(log => `
+            <div style="margin-bottom: 0.25rem;"><span style="color: var(--accent-primary)">&gt;</span> ${log}</div>
+          `).join('');
+
+          // Fade content back in
+          const showElements = ['#console-phase-badge', '#console-title', '#console-subtitle', '#console-log-lines'];
+          if (stepNum === 1) {
+            showElements.push('#console-audit-system');
+          } else {
+            showElements.push('#console-checklist');
+          }
+
+          gsap.to(showElements, {
+            opacity: 1,
+            y: 0,
+            duration: 0.25,
+            stagger: 0.015
+          });
+        }
+      });
+    }
+
+    function initInteractiveTimeline() {
+      const steps = document.querySelectorAll('.timeline-step');
+      steps.forEach((step, index) => {
+        step.style.cursor = 'pointer';
+        
+        // Listen to mouseenter for smooth preview
+        step.addEventListener('mouseenter', () => {
+          steps.forEach(s => s.classList.remove('active'));
+          step.classList.add('active');
+          updateConsoleStep(index + 1);
+        });
+
+        // Listen to click to lock it in
+        step.addEventListener('click', () => {
+          steps.forEach(s => s.classList.remove('active'));
+          step.classList.add('active');
+          updateConsoleStep(index + 1);
+        });
+      });
+
+      // Initialize with step 1
+      updateConsoleStep(1);
+    }
+
+    // 2.5 Hero Text Cycling Animation (KyroBiz animation)
+    function initHeroReveal() {
+      const typedTarget = document.getElementById('typed-text');
+      if (!typedTarget) return;
+
+      const valueLines = [
+        'Neural Process Automation.',
+        'High-trust engineering code',
+        'Autonomous synthesis system',
+        'Sovereign Data intelligence',
+        'Engineering excellence'
+      ];
+
+      let currentLine = 1;
+
+      function cycleValueText() {
+        if (!typedTarget) return;
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            currentLine = (currentLine + 1) % valueLines.length;
+            gsap.delayedCall(2.5, cycleValueText);
+          }
+        });
+
+        tl.to(typedTarget, {
+          opacity: 0,
+          y: 10,
+          filter: 'blur(10px)',
+          duration: 0.8,
+          ease: 'power3.inOut'
+        })
+        .set(typedTarget, {
+          textContent: valueLines[currentLine],
+          y: -10,
+          filter: 'blur(10px)'
+        })
+        .to(typedTarget, {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1.2,
+          ease: 'expo.out'
+        });
+      }
+
+      // Start cycling delay
+      gsap.delayedCall(2.5, cycleValueText);
+    }
+
+    // 3. Simulated Terminal Real-time logs
+    function initTerminalLogs() {
+      const terminalBody = document.getElementById('hero-terminal');
+      if (!terminalBody) return;
+
+      const terminalLogs = [
+        "Loading software dependencies...",
+        "Analyzing cloud load parameters...",
+        "Activating automatic backup nodes...",
+        "System fully functional.",
+        "Awaiting input commands..."
+      ];
+      let logIndex = 0;
+
+      function appendTerminalLog() {
+        if (logIndex < terminalLogs.length) {
+          const lines = terminalBody.innerHTML.split('<div class="terminal-line">');
+          let blinkLine = lines.pop();
+          const newLine = `<div class="terminal-line"><span class="terminal-success">✓</span> ${terminalLogs[logIndex]}</div>`;
+          terminalBody.innerHTML = lines.join('<div class="terminal-line">') + newLine + '<div class="terminal-line">' + blinkLine;
+          logIndex++;
+          terminalBody.scrollTop = terminalBody.scrollHeight;
+          setTimeout(appendTerminalLog, 2500 + Math.random() * 1500);
+        }
+      }
+      setTimeout(appendTerminalLog, 3000);
+    }
+
+    // 4. Synthesized Activation Chime
+    function playActivationChime() {
+      if (!audioCtx) initAudio();
+      if (!audioCtx) return;
+      try {
+        const now = audioCtx.currentTime;
+        const notes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C major arpeggio
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          
+          gain.gain.setValueAtTime(0, now + idx * 0.08);
+          gain.gain.linearRampToValueAtTime(0.04, now + idx * 0.08 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 0.6);
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.7);
+        });
+      } catch (e) {
+        console.warn("Activation chime synth failed: ", e);
+      }
+    }
+
+    // 5. Cinematic Boot Loader Overlay Controller
+    function initBootLoader() {
+      const progressBar = document.getElementById('boot-progress-bar');
+      const percentageText = document.getElementById('boot-percentage');
+      const statusText = document.getElementById('boot-status-text');
+      const activateBtn = document.getElementById('btn-activate-core');
+      const bootOverlay = document.getElementById('system-boot');
+      
+      if (!progressBar || !percentageText || !statusText || !activateBtn || !bootOverlay) return;
+
+      const bootSteps = [
+        { pct: 8,   text: 'SYSTEM → Core directive initiated' },
+        { pct: 22,  text: 'NETWORK → Secure socket established' },
+        { pct: 38,  text: 'ENGINE → Acceleration profiled' },
+        { pct: 52,  text: 'RENDER → WebGL geometry compiled' },
+        { pct: 66,  text: 'AUDIO → Synthesizer synchronized' },
+        { pct: 80,  text: 'MEMORY → Intelligence module linked' },
+        { pct: 94,  text: 'STATUS → All subsystems initialized' },
+        { pct: 100, text: 'READY → Awaiting activation...' }
+      ];
+
+      let currentStep = 0;
+      const stepDelay = 480;
+
+      function revealNextStep() {
+        if (currentStep >= bootSteps.length) {
+          // Final fade out of status text, then show button
+          gsap.to(statusText, {
+            opacity: 0, y: 8, filter: 'blur(6px)', duration: 0.4, ease: 'power3.inOut',
+            onComplete: () => {
+              activateBtn.style.display = 'inline-flex';
+              gsap.fromTo(activateBtn, 
+                { opacity: 0, scale: 0.9, y: 10 },
+                { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }
+              );
+            }
+          });
+          return;
+        }
+
+        const step = bootSteps[currentStep];
+
+        // Animate percentage counter
+        const prevPct = currentStep > 0 ? bootSteps[currentStep - 1].pct : 0;
+        const pctObj = { val: prevPct };
+        gsap.to(pctObj, {
+          val: step.pct,
+          duration: stepDelay / 1000 * 0.8,
+          ease: "power1.out",
+          onUpdate: () => {
+            const v = Math.floor(pctObj.val);
+            progressBar.style.width = v + '%';
+            percentageText.textContent = String(v).padStart(2, '0') + '%';
+          }
+        });
+
+        // Fade+blur reveal animation (same style as hero typed-text)
+        const tl = gsap.timeline({
+          onComplete: () => {
+            currentStep++;
+            setTimeout(revealNextStep, stepDelay * 0.3);
+          }
+        });
+
+        // If not the first step, fade out current text first
+        if (currentStep > 0) {
+          tl.to(statusText, {
+            opacity: 0, y: 6, filter: 'blur(8px)',
+            duration: 0.3, ease: 'power3.inOut'
+          });
+        }
+
+        tl.set(statusText, {
+          textContent: step.text,
+          y: -6,
+          filter: 'blur(8px)'
+        })
+        .to(statusText, {
+          opacity: 1, y: 0, filter: 'blur(0px)',
+          duration: 0.5, ease: 'expo.out'
+        });
+
+        playKeyboardClick();
+      }
+
+      // Start the boot sequence after a brief pause
+      setTimeout(revealNextStep, 500);
+
+      activateBtn.addEventListener('click', () => {
+        playActivationChime();
+        
+        if (!audioCtx) initAudio();
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        
+        if (!isPlaying) {
+          isPlaying = true;
+          const toggleBtn = document.getElementById('audio-toggle');
+          if (toggleBtn) toggleBtn.classList.add('audio-active');
+          
+          masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+          masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 1.5);
+          
+          playInterstellarChord();
+          setTimeout(playMelodyNote, 1000);
+        }
+
+        gsap.timeline()
+          .to(bootOverlay, {
+            yPercent: -100,
+            opacity: 0,
+            duration: 1.0,
+            ease: "power4.inOut"
+          })
+          .set(bootOverlay, { display: 'none' });
+          
+        gsap.fromTo(coreGroup.position, 
+          { z: -8 }, 
+          { z: 0, duration: 2.2, ease: "power3.out", delay: 0.2 }
+        );
+      });
+    }
+
+    // ==========================================
+    // SYSTEM FOUNDATION AUDIT DATABASE
+    // ==========================================
+    const auditData = {
+      Software: {
+        title: "Software Development",
+        icon: "💻",
+        score: "98% READY",
+        subtitle: "Building intelligent software solutions that solve complex business challenges.",
+        services: [
+          "Custom Business Applications",
+          "Enterprise Software Solutions",
+          "Workflow Management Platforms",
+          "Software Modernization",
+          "Database Solutions"
+        ],
+        benefits: [
+          "Cuts manual errors by 90%",
+          "Speeds up operations by 3x",
+          "Scales with team size",
+          "Secure data storage"
+        ]
+      },
+      Web: {
+        title: "Web Development",
+        icon: "🌐",
+        score: "95% READY",
+        subtitle: "Creating responsive, fast, and SEO-optimized web products.",
+        services: [
+          "Custom Web Applications",
+          "Enterprise Websites",
+          "SaaS Landing Pages",
+          "E-Commerce Solutions",
+          "UI/UX Design Systems"
+        ],
+        benefits: [
+          "Page speed optimized",
+          "Mobile responsive",
+          "SEO ranking ready",
+          "Modern aesthetics"
+        ]
+      },
+      Automation: {
+        title: "Workflow Automation",
+        icon: "🤖",
+        score: "97% READY",
+        subtitle: "Eliminating repetitive tasks with smart background agents.",
+        services: [
+          "Custom AI Agent Systems",
+          "Office Script Automations",
+          "ETL Pipeline Automation",
+          "Autoreporting Tools",
+          "Email Notification Alerts"
+        ],
+        benefits: [
+          "Zero manual data entry",
+          "24/7 background tasks",
+          "Instant system alerts",
+          "Reduces labor costs"
+        ]
+      },
+      Data: {
+        title: "Sovereign Data Intelligence",
+        icon: "📊",
+        score: "94% READY",
+        subtitle: "Converting raw metrics into real-time decision telemetry.",
+        services: [
+          "Executive BI Dashboards",
+          "Real-time ETL Pipelines",
+          "Predictive Analytics Models",
+          "Database Optimizations",
+          "Custom Analytics Widgets"
+        ],
+        benefits: [
+          "Live business dashboard",
+          "Sovereign data storage",
+          "Actionable reports",
+          "Predicts future trends"
+        ]
+      },
+      Cloud: {
+        title: "Cloud & OS",
+        icon: "☁️",
+        score: "96% READY",
+        subtitle: "Provisioning high-performance cloud architecture and containers.",
+        services: [
+          "Docker & Container Hosts",
+          "Kubernetes Deployments",
+          "Cloud Networking & SSL",
+          "Automated Backup Nodes",
+          "VPS Server Maintenance"
+        ],
+        benefits: [
+          "99.9% targeted uptime",
+          "Automated daily backups",
+          "Zero-trust secure lines",
+          "Low server latencies"
+        ]
+      },
+      API: {
+        title: "API & Integrations",
+        icon: "🔗",
+        score: "93% READY",
+        subtitle: "Connecting legacy systems and payment processors seamlessly.",
+        services: [
+          "REST & GraphQL APIs",
+          "Third-party integrations",
+          "Webhook syncing setups",
+          "OAuth Secure Logins",
+          "Payment gateway hooks"
+        ],
+        benefits: [
+          "Cross-system database sync",
+          "Secure API transfers",
+          "Instant status webhooks",
+          "Smooth user auth flow"
+        ]
+      },
+      Support: {
+        title: "Continuous Maintenance",
+        icon: "🛠️",
+        score: "92% READY",
+        subtitle: "Active support SLA, updates, and maintenance checkups.",
+        services: [
+          "Production Support SLA",
+          "System Speed Optimizations",
+          "Database Tuning Checks",
+          "Security Package Patches",
+          "Bug & Error Resolution"
+        ],
+        benefits: [
+          "Priority developer response",
+          "Continuous code health",
+          "Guaranteed data safety",
+          "Peace of mind operations"
+        ]
+      },
+      Docs: {
+        title: "Documentation Services",
+        icon: "📚",
+        score: "91% READY",
+        subtitle: "Publishing detailed runbooks, API references, and user guides.",
+        services: [
+          "API Reference Guides",
+          "Standard Operating Manuals",
+          "Onboarding Runbooks",
+          "Interactive User Manuals",
+          "Technical Architecture Wikis"
+        ],
+        benefits: [
+          "Speeds up developer ramp",
+          "Clear user walkthroughs",
+          "Easy team maintenance",
+          "Improves client trust"
+        ]
+      },
+      Professional: {
+        title: "Professional Solutions",
+        icon: "🎯",
+        score: "90% READY",
+        subtitle: "Creating interactive personal brands, resumes, and portfolios.",
+        services: [
+          "Personal Web Portfolios",
+          "Interactive Digital Resumes",
+          "LinkedIn Optimization",
+          "Personal Branding Design",
+          "Job Search Strategies"
+        ],
+        benefits: [
+          "Stand out to key leads",
+          "Sleek mobile-first design",
+          "Highlights code skills",
+          "Premium digital identity"
+        ]
+      },
+      Music: {
+        title: "Media & Audio Production",
+        icon: "🎵",
+        score: "89% READY",
+        subtitle: "Engineering custom soundtracks, sound branding, and intro tracks.",
+        services: [
+          "Custom Background Tracks",
+          "Podcast Audio Intros",
+          "Corporate Branding Audio",
+          "Sound Effect Libraries",
+          "Royalty-Free Ambience"
+        ],
+        benefits: [
+          "Immersive user interest",
+          "High acoustic clarity",
+          "Saves licensing budgets",
+          "Cinematic web polish"
+        ]
+      }
+    };
+
+    // ==========================================
+    // SYSTEM FOUNDATION AUDIT RENDERER
+    // ==========================================
+    function renderAuditSystem() {
+      const container = document.getElementById('audit-pills-container');
+      if (!container || container.children.length > 0) return; // Only render once
+
+      const keys = Object.keys(auditData);
+      container.innerHTML = keys.map(key => {
+        const item = auditData[key];
+        // Shorten labels to fit dashboard width
+        const label = key === 'Professional' ? 'Pro' : key === 'Automation' ? 'Automation' : key === 'Software' ? 'Software' : key === 'Support' ? 'Support' : key === 'Data' ? 'Data/BI' : item.title.split(' ')[0];
+        const isDefault = key === 'Software';
+        return `
+          <div class="audit-pill ${isDefault ? 'active' : ''}" data-key="${key}" onclick="selectAuditPillar('${key}')">
+            ${item.icon} ${label}: ${item.score.split('%')[0]}%
+          </div>
+        `;
+      }).join('');
+
+      // Initialize detail panel with first item (Software)
+      selectAuditPillar('Software', true);
+    }
+
+    function selectAuditPillar(key, immediate = false) {
+      const item = auditData[key];
+      if (!item) return;
+
+      // Update active pill styling
+      const pills = document.querySelectorAll('#audit-pills-container .audit-pill');
+      pills.forEach(pill => {
+        if (pill.getAttribute('data-key') === key) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      const panel = document.getElementById('audit-detail-panel');
+      const iconEl = document.getElementById('audit-detail-icon');
+      const titleEl = document.getElementById('audit-detail-title');
+      const scoreEl = document.getElementById('audit-detail-score');
+      const subtitleEl = document.getElementById('audit-detail-subtitle');
+      const servicesEl = document.getElementById('audit-detail-services');
+      const benefitsEl = document.getElementById('audit-detail-benefits');
+
+      if (!panel || !iconEl || !titleEl || !scoreEl || !subtitleEl || !servicesEl || !benefitsEl) return;
+
+      const updateContent = () => {
+        iconEl.textContent = item.icon;
+        titleEl.textContent = item.title;
+        scoreEl.textContent = item.score;
+        subtitleEl.textContent = item.subtitle;
+        servicesEl.innerHTML = item.services.map(s => `<li>${s}</li>`).join('');
+        benefitsEl.innerHTML = item.benefits.map(b => `<li>${b}</li>`).join('');
+      };
+
+      if (immediate) {
+        updateContent();
+        gsap.set(panel, { opacity: 1, y: 0 });
+      } else {
+        gsap.to(panel, {
+          opacity: 0,
+          y: 4,
+          duration: 0.15,
+          onComplete: () => {
+            updateContent();
+            gsap.to(panel, {
+              opacity: 1,
+              y: 0,
+              duration: 0.25,
+              ease: "power2.out"
+            });
+          }
+        });
+      }
+    }
+
+    // ==========================================
+    // INTERACTIVE PROJECT ESTIMATOR DATABASE
+    // ==========================================
+    const estimatorData = {
+      Software: {
+        MVP: {
+          timeline: "14 Days",
+          stack: "Custom Application Architecture / Database Design / Responsive UI",
+          deliverables: [
+            "Single-purpose business application prototype",
+            "Relational database schema for core tables",
+            "Secure single-admin dashboard interface",
+            "Optimized query loops for speed"
+          ]
+        },
+        Standard: {
+          timeline: "30 Days",
+          stack: "Enterprise Logic / Relational Database / Role Control",
+          deliverables: [
+            "Multi-user role management console",
+            "Automated PDF and spreadsheet report exports",
+            "Secure user access and privilege controls",
+            "Staging environment deployment testing"
+          ]
+        },
+        Enterprise: {
+          timeline: "60 Days",
+          stack: "Distributed Architecture / High-Volume Database / SLA Support",
+          deliverables: [
+            "Highly available system core with redundancy",
+            "Live server telemetry and performance dashboards",
+            "Security vulnerability audit and compliance review",
+            "Active-active database synchronization setup"
+          ]
+        }
+      },
+      Web: {
+        MVP: {
+          timeline: "10 Days",
+          stack: "Static Layout / Contact Forms / Basic SEO",
+          deliverables: [
+            "High-performance responsive landing page",
+            "Secure email/contact form submission handler",
+            "Optimized page-speed and metadata configuration"
+          ]
+        },
+        Standard: {
+          timeline: "20 Days",
+          stack: "Dynamic CMS / Contact Pipelines / Analytics Sync",
+          deliverables: [
+            "Dynamic business site with content manager editor",
+            "Lead database storage pipeline with auto-notifications",
+            "Full search engine indexing optimization audit",
+            "User behavior analytics tracking integrations"
+          ]
+        },
+        Enterprise: {
+          timeline: "40 Days",
+          stack: "E-Commerce Architecture / Caching CDN / Global Localization",
+          deliverables: [
+            "Custom web storefront with payment integrations",
+            "Global CDN caching setup for ultra-low latencies",
+            "Interactive client telemetry dashboards",
+            "Multi-language dynamic localization system"
+          ]
+        }
+      },
+      Automation: {
+        MVP: {
+          timeline: "7 Days",
+          stack: "Automation Scripts / Data Extractors / Schedulers",
+          deliverables: [
+            "Targeted background data processing script",
+            "Automated local spreadsheet generator",
+            "Regular scheduled script runner configuration"
+          ]
+        },
+        Standard: {
+          timeline: "14 Days",
+          stack: "Email Automations / Notification Alerts / Auto-Parsers",
+          deliverables: [
+            "Smart system parsing inbound emails and replying",
+            "Auto-generated PDF performance reports to inbox",
+            "System error alert webhooks to communication channels"
+          ]
+        },
+        Enterprise: {
+          timeline: "30 Days",
+          stack: "Orchestration Systems / Processing Queues / Audit Logs",
+          deliverables: [
+            "Multi-process task orchestrator and automation engine",
+            "Real-time task processing queue with visual tracking",
+            "Immutable audit logs and automated recovery rules"
+          ]
+        }
+      },
+      Data: {
+        MVP: {
+          timeline: "10 Days",
+          stack: "Database Setup / Custom Queries / Visual Charts",
+          deliverables: [
+            "Relational database layout design and setup",
+            "Optimized data extraction queries",
+            "Interactive visual charts panel"
+          ]
+        },
+        Standard: {
+          timeline: "21 Days",
+          stack: "ETL Pipelines / BI Dashboards / Alert Systems",
+          deliverables: [
+            "Automated data extraction and loading pipelines",
+            "Executive business metrics display board",
+            "Automated data anomaly warning notifications"
+          ]
+        },
+        Enterprise: {
+          timeline: "45 Days",
+          stack: "High-Scale DB / Real-time Data Sync / Forecast Modeling",
+          deliverables: [
+            "Ultra-high performance database storage engine",
+            "Custom 3D visual telemetry console",
+            "Data-driven predictive forecasting model"
+          ]
+        }
+      },
+      Cloud: {
+        MVP: {
+          timeline: "5 Days",
+          stack: "Container Deployment / Server Tuning / SSL Security",
+          deliverables: [
+            "Single-container virtual server setup",
+            "Auto-renewing security certificates config",
+            "Basic firewall rules and open port audits"
+          ]
+        },
+        Standard: {
+          timeline: "12 Days",
+          stack: "Load Balancing / Secure Proxy / Backups Setup",
+          deliverables: [
+            "Multi-container application routing setup",
+            "Reverse proxy with SSL/TLS termination",
+            "Automated nightly file system backups"
+          ]
+        },
+        Enterprise: {
+          timeline: "25 Days",
+          stack: "Zero-Trust Private Networks / Autoscaling Clusters / DR Site",
+          deliverables: [
+            "Declarative cloud resource specifications config",
+            "Auto-scaling server clusters with health monitoring",
+            "Zero-trust virtual private network lines"
+          ]
+        }
+      },
+      API: {
+        MVP: {
+          timeline: "7 Days",
+          stack: "REST Endpoints / JSON Payloads / Token Auth",
+          deliverables: [
+            "Secure API endpoint architecture structure",
+            "JSON data parser and formatter libraries",
+            "Simple token-based client access validation"
+          ]
+        },
+        Standard: {
+          timeline: "15 Days",
+          stack: "Integrations / Secure OAuth / Webhook Syncs",
+          deliverables: [
+            "Third-party platform service integrations",
+            "Secure OAuth multi-provider login integration",
+            "Real-time webhook synchronization listeners"
+          ]
+        },
+        Enterprise: {
+          timeline: "30 Days",
+          stack: "Payment Hookups / Middleware / Custom Sync",
+          deliverables: [
+            "Secure payment gateway hooks and event tracking",
+            "Custom enterprise systems translation middleware",
+            "High-throughput transactional sync verification"
+          ]
+        }
+      },
+      Support: {
+        MVP: {
+          timeline: "5 Days",
+          stack: "SLA Support / Bug Resolution / Backups",
+          deliverables: [
+            "Initial troubleshooting and server health reviews",
+            "Emergency software error fixes and repairs",
+            "Scheduled code backup systems validation"
+          ]
+        },
+        Standard: {
+          timeline: "15 Days",
+          stack: "Audits / Speed Tuning / Security Updates",
+          deliverables: [
+            "Regular server performance and load timing checks",
+            "Third-party package security patch updates",
+            "Optimized query speeds and database indices"
+          ]
+        },
+        Enterprise: {
+          timeline: "30 Days",
+          stack: "Priority SLA / Active Monitoring / UX Adjustments",
+          deliverables: [
+            "Priority response times for business-critical issues",
+            "Continuous live monitoring and uptime alarms",
+            "Regular front-end adjustments and minor edits"
+          ]
+        }
+      },
+      Docs: {
+        MVP: {
+          timeline: "5 Days",
+          stack: "API Guides / Install Manuals / Wiki",
+          deliverables: [
+            "Detailed API endpoint reference manuals",
+            "Basic local setup and configuration steps",
+            "Developer onboarding wiki document"
+          ]
+        },
+        Standard: {
+          timeline: "10 Days",
+          stack: "Runbooks / DB Schemas / User Manuals",
+          deliverables: [
+            "Comprehensive server deployment runbooks",
+            "Interactive system architecture diagrams",
+            "End-user system step-by-step guidelines"
+          ]
+        },
+        Enterprise: {
+          timeline: "20 Days",
+          stack: "Interactive Walkthroughs / Video Guides / Audits",
+          deliverables: [
+            "Interactive team documentation systems",
+            "Recorded video walkthrough video guide scripts",
+            "Full code comment and structure coverage audit"
+          ]
+        }
+      },
+      Professional: {
+        MVP: {
+          timeline: "7 Days",
+          stack: "Portfolio Layout / Brand Styling / Bio Writeups",
+          deliverables: [
+            "Single-page personal brand showcase site",
+            "Optimized digital profile case-study text",
+            "Mobile-first responsive design stylesheet"
+          ]
+        },
+        Standard: {
+          timeline: "14 Days",
+          stack: "Multi-Page Brands / Professional Resumes / Strategy",
+          deliverables: [
+            "Multi-page interactive digital resume site",
+            "Cohesive visual assets and color guidelines",
+            "Personal brand marketing positioning strategy"
+          ]
+        },
+        Enterprise: {
+          timeline: "25 Days",
+          stack: "Custom Brand Portfolios / Case Studies / SEO Optimization",
+          deliverables: [
+            "Advanced interactive project portfolio hub",
+            "Detailed technical case studies layout writeup",
+            "Complete search engine index optimization pass"
+          ]
+        }
+      },
+      Audio: {
+        MVP: {
+          timeline: "5 Days",
+          stack: "Ambient Loops / Intro Melodies / Sound SFX",
+          deliverables: [
+            "Custom ambient background audio loop track",
+            "Unique high-clarity brand intro melody",
+            "Basic interactive page click sound library"
+          ]
+        },
+        Standard: {
+          timeline: "10 Days",
+          stack: "Soundtrack Packages / Podcast Tracks / FX Design",
+          deliverables: [
+            "Multi-track ambient background audio bundle",
+            "Dynamic podcast audio transition assets",
+            "Custom synthesized button click variations"
+          ]
+        },
+        Enterprise: {
+          timeline: "20 Days",
+          stack: "Audio Synthesizer Scripts / Brand Audio Guidelines / Master Tuning",
+          deliverables: [
+            "Interactive Web Audio synthesizer script setup",
+            "Comprehensive sonic brand style manual documentation",
+            "Full studio-quality acoustic mixing and mastering"
+          ]
+        }
+      }
+    };
+
+    // ==========================================
+    // INTERACTIVE PROJECT ESTIMATOR CONTROLLER
+    // ==========================================
+    function initProjectEstimator() {
+      const serviceContainer = document.getElementById('brief-services');
+      const scaleContainer = document.getElementById('brief-scale');
+      const btnEmail = document.getElementById('btn-email-link');
+
+      if (!serviceContainer || !scaleContainer || !btnEmail) return;
+
+      let selectedService = "Software";
+      let selectedScale = "MVP";
+
+      function updateEstimatorOutput() {
+        const serviceData = estimatorData[selectedService];
+        if (!serviceData) return;
+        const scaleData = serviceData[selectedScale];
+        if (!scaleData) return;
+
+        const stackEl = document.getElementById('brief-out-stack');
+        const deliverablesEl = document.getElementById('brief-out-deliverables');
+
+        if (stackEl) stackEl.textContent = scaleData.stack;
+        if (deliverablesEl) {
+          deliverablesEl.innerHTML = scaleData.deliverables.map(d => `<li>${d}</li>`).join('');
+        }
+
+        // Update email link subject and body
+        const subject = encodeURIComponent(`Project Inquiry — ${selectedService} [Scale: ${selectedScale}]`);
+        const bodyText = `Hello KyroCore Team,\n\nI have configured a project brief on your website:\n\n- Project Domain: ${selectedService}\n- Scale: ${selectedScale}\n- Service Focus: ${scaleData.stack}\n- Key Deliverables:\n${scaleData.deliverables.map(d => `  * ${d}`).join('\n')}\n\nLet's discuss further details!`;
+        btnEmail.href = `mailto:kyrocoretechnologies@gmail.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+      }
+
+      // Handle Service Chips
+      const serviceChips = serviceContainer.querySelectorAll('.choice-chip');
+      serviceChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          serviceChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          selectedService = chip.getAttribute('data-val');
+          gsap.fromTo(chip, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+          updateEstimatorOutput();
+        });
+      });
+
+      // Handle Scale Chips
+      const scaleChips = scaleContainer.querySelectorAll('.choice-chip');
+      scaleChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          scaleChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          selectedScale = chip.getAttribute('data-val');
+          gsap.fromTo(chip, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+          updateEstimatorOutput();
+        });
+      });
+
+      // Initial run
+      updateEstimatorOutput();
+    }
+
+    // ==========================================
+    // SYNTHESIZED MECHANICAL KEYBOARD CLICK SOUND
+    // ==========================================
+    function playKeyboardClick() {
+      if (!audioCtx) return;
+      try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
+        // Bandpass filter centered around 1400Hz for high click response
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1400, now);
+        filter.Q.setValueAtTime(5, now);
+
+        osc.type = 'triangle';
+        // Add frequency variance to simulate distinct mechanical switches
+        const freq = 120 + Math.random() * 260;
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(50, now + 0.035);
+
+        // Click Envelope (rapid mechanical click decay)
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } catch (e) {
+        console.warn("Keyboard click synth node creation failed: ", e);
+      }
+    }
+
+    // ==========================================
+    // SCROLL-TRIGGERED FOUNDER TYPEWRITER
+    // ==========================================
+    function initFounderTypewriter() {
+      const bioText = document.getElementById('founder-bio-text');
+      if (!bioText) return;
+
+      const paragraphs = [
+        "Yuvaraj Ramasamy founded KyroCore Technologies with a clear directive: to construct premium engineering solutions that bridge the gap between complex organizational challenges and modern development frameworks.",
+        "His multidisciplinary engineering profile spans custom software design, database optimizations, container cloud infrastructure, workflow scripts, personal brand design, and background audio production."
+      ];
+
+      // Clear bio content immediately on initialization to prepare for typewriter
+      bioText.innerHTML = '';
+
+      const p1 = document.createElement('p');
+      p1.className = 'mb-3';
+      const p2 = document.createElement('p');
+      p2.className = 'mb-3';
+      bioText.appendChild(p1);
+      bioText.appendChild(p2);
+
+      let isTyping = false;
+
+      function typeText(targetEl, text, speed, callback) {
+        let index = 0;
+        function step() {
+          if (index < text.length) {
+            targetEl.textContent += text.charAt(index);
+            // Play mechanical keypress click sound on characters
+            if (text.charAt(index) !== ' ') {
+              playKeyboardClick();
+            }
+            index++;
+            setTimeout(step, speed);
+          } else if (callback) {
+            callback();
+          }
+        }
+        step();
+      }
+
+      // Bulletproof IntersectionObserver trigger
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isTyping) {
+            // Ensure Audio Context is active
+            if (!audioCtx) initAudio();
+            if (audioCtx && audioCtx.state === 'suspended') {
+              audioCtx.resume().catch(e => console.log("AudioContext resume failed: ", e));
+            }
+            
+            isTyping = true;
+            observer.unobserve(entry.target); // Trigger only once
+
+            // Run staggered typing sequence
+            typeText(p1, paragraphs[0], 25, () => {
+              typeText(p2, paragraphs[1], 25, () => {
+                isTyping = false;
+              });
+            });
+          }
+        });
+      }, {
+        threshold: 0.15 // Trigger when 15% of the founder section is visible
+      });
+
+      observer.observe(document.getElementById('founder'));
+    }
+
+    // Trigger Initializations on Load
+    initBootLoader();
+    initLenis();
+    initHeroReveal();
+    initInteractiveTimeline();
+    initTerminalLogs();
+    initProjectEstimator();
+    initFounderTypewriter();
+  </script>
+
+  <!-- Active pulse frames for systems indicator -->
+  <style>
+    @keyframes activePulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.5); }
+      70% { box-shadow: 0 0 0 6px rgba(0, 242, 254, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+    }
+    .blink {
+      animation: textBlink 1.2s infinite;
+    }
+    @keyframes textBlink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+  </style>
+</body>
+</html>
