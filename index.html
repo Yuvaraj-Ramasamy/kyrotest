@@ -713,27 +713,27 @@
           
           <div class="col-12 col-lg-6">
             <div class="k-badge mb-3">WORKSPACE DESIGN</div>
-            <h2 style="font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.25rem;">
+            <h2 class="text-reveal-target" style="font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.25rem;">
               Sleek workspaces that accelerate execution
             </h2>
-            <p class="k-subtitle mb-4" style="max-width: 50ch; font-size: clamp(15px, 2vw, 17px); color: var(--text-secondary);">
+            <p class="k-subtitle mb-4 showcase-desc" style="max-width: 50ch; font-size: clamp(15px, 2vw, 17px); color: var(--text-secondary);">
               We design and construct clean, custom digital dashboards. Minimize clutter, optimize information density, and keep your engineering processes operating at maximum transparency.
             </p>
 
-            <div style="display: grid; gap: 0.85rem; margin-bottom: 2rem; color: var(--text-primary); font-weight: 500; font-size: 14px;">
-              <div>✓ Structured bento grid UI containers</div>
-              <div>✓ High-performance, lightweight rendering systems</div>
-              <div>✓ Complete workflow tracking and telemetry readouts</div>
+            <div class="showcase-list" style="display: grid; gap: 0.85rem; margin-bottom: 2rem; color: var(--text-primary); font-weight: 500; font-size: 14px;">
+              <div class="showcase-item">✓ Structured bento grid UI containers</div>
+              <div class="showcase-item">✓ High-performance, lightweight rendering systems</div>
+              <div class="showcase-item">✓ Complete workflow tracking and telemetry readouts</div>
             </div>
 
-            <a href="#contact" class="btn k-btn k-btn-primary">
+            <a href="#contact" class="btn k-btn k-btn-primary showcase-btn">
               Start Project
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
 
           <div class="col-12 col-lg-6">
-            <div class="k-card" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--border-line); box-shadow: var(--shadow-premium);">
+            <div class="k-card showcase-card" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--border-line); box-shadow: var(--shadow-premium);">
               <img src="images/showcase.png" alt="KyroCore Workspace Dashboard Showcase" style="width: 100%; height: auto; display: block;" />
             </div>
           </div>
@@ -1042,7 +1042,8 @@
                 <!-- Action Options -->
                 <div>
                   <a class="btn k-btn k-btn-primary w-100 py-3 d-inline-flex align-items-center justify-content-center gap-2" id="btn-email-link" href="mailto:kyrocoretechnologies@gmail.com?subject=Project%20Inquiry%20-%20KyroCore" style="font-size: 13px; border-radius: 12px; font-weight: 700;">
-                    ✉️ Email Us Your Proposal
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="me-1"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    Email Us Your Proposal
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                   </a>
                 </div>
@@ -1075,11 +1076,11 @@
           </div>
           <div class="d-flex flex-column gap-1 mt-3" style="font-size: 12px; color: var(--text-secondary);">
             <div class="d-flex align-items-center gap-2">
-              <span style="color: var(--accent-secondary); font-size: 13px;">✉</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-secondary);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               <a href="mailto:kyrocoretechnologies@gmail.com" style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">kyrocoretechnologies@gmail.com</a>
             </div>
             <div class="d-flex align-items-center gap-2">
-              <span style="color: var(--accent-secondary); font-size: 13px;">📍</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-secondary);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               <span>Erode District, Tamil Nadu, India</span>
             </div>
           </div>
@@ -1108,13 +1109,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // Global handle for WebGL core group reference
+    let coreGroup = null;
+
     // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
     // 1. Current Year Footer Update
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. Floating Navbar Scroll Styling Trigger
+    // 2. Floating Navbar Scroll Styling Trigger & Section Swell Sound
+    let lastSectionId = '';
     window.addEventListener('scroll', () => {
       const topbar = document.querySelector('.topbar');
       if (window.scrollY > 50) {
@@ -1127,11 +1132,18 @@
       const sections = document.querySelectorAll('section[id]');
       let currentSectionId = '';
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 200;
+        const sectionTop = section.offsetTop - 250;
         if (window.pageYOffset >= sectionTop) {
           currentSectionId = section.getAttribute('id');
         }
       });
+
+      if (currentSectionId && currentSectionId !== lastSectionId) {
+        if (lastSectionId !== '') { // Trigger only on transition
+          playCinematicSwell();
+        }
+        lastSectionId = currentSectionId;
+      }
 
       const navlinks = document.querySelectorAll('nav .k-navlink');
       navlinks.forEach(link => {
@@ -1177,181 +1189,206 @@
     // ==========================================
     // THREE.JS HIGH-PERFORMANCE 3D SCENE (3D GLOBE)
     // ==========================================
-    const canvas = document.getElementById('webgl-canvas');
-    const scene = new THREE.Scene();
-    
-    // Camera Setup
-    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 7.5;
+    try {
+      const canvas = document.getElementById('webgl-canvas');
+      if (canvas && typeof THREE !== 'undefined') {
+        const scene = new THREE.Scene();
+        
+        // Camera Setup
+        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.z = 7.5;
 
-    // Optimized Renderer
-    const renderer = new THREE.WebGLRenderer({ 
-      canvas: canvas, 
-      alpha: true, 
-      antialias: true,
-      powerPreference: "high-performance" 
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Capped for performance
-    renderer.setSize(window.innerWidth, window.innerHeight);
+        // Optimized Renderer
+        const renderer = new THREE.WebGLRenderer({ 
+          canvas: canvas, 
+          alpha: true, 
+          antialias: true,
+          powerPreference: "high-performance" 
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Capped for performance
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Particle Texture Generator (Circular Glowing Points)
-    function createCircleTexture() {
-      const size = 32;
-      const canvasTex = document.createElement('canvas');
-      canvasTex.width = size;
-      canvasTex.height = size;
-      const ctxTex = canvasTex.getContext('2d');
-      const grad = ctxTex.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-      grad.addColorStop(0, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.2, 'rgba(255,255,255,0.8)');
-      grad.addColorStop(1, 'rgba(255,255,255,0)');
-      ctxTex.fillStyle = grad;
-      ctxTex.fillRect(0, 0, size, size);
-      return new THREE.CanvasTexture(canvasTex);
-    }
-    const particleTexture = createCircleTexture();
+        // Particle Texture Generator (Circular Glowing Points)
+        function createCircleTexture() {
+          const size = 32;
+          const canvasTex = document.createElement('canvas');
+          canvasTex.width = size;
+          canvasTex.height = size;
+          const ctxTex = canvasTex.getContext('2d');
+          const grad = ctxTex.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+          grad.addColorStop(0, 'rgba(255,255,255,1)');
+          grad.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+          grad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctxTex.fillStyle = grad;
+          ctxTex.fillRect(0, 0, size, size);
+          return new THREE.CanvasTexture(canvasTex);
+        }
+        const particleTexture = createCircleTexture();
 
-    // Group for containing all core points
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
+        // Group for containing all core points
+        coreGroup = new THREE.Group();
+        scene.add(coreGroup);
 
-    // 1. Single 3D Particle Sphere Core Geometry
-    const count = 1800;
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
+        // 1. Single 3D Particle Sphere Core Geometry
+        const count = 1000; // Reduced from 1800 for smoother performance
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
 
-    const colorPrimary = new THREE.Color('#6366F1');   // Indigo
-    const colorSecondary = new THREE.Color('#00F2FE'); // Cyan
-    const colorPurple = new THREE.Color('#A855F7');    // Purple
+        const colorPrimary = new THREE.Color('#6366F1');   // Indigo
+        const colorSecondary = new THREE.Color('#00F2FE'); // Cyan
+        const colorPurple = new THREE.Color('#A855F7');    // Purple
 
-    for (let i = 0; i < count; i++) {
-      // Golden spiral distribution on sphere for structural points
-      const phi = Math.acos(-1 + (2 * i) / count);
-      const theta = Math.sqrt(count * Math.PI) * phi;
-      
-      // Radius variation to give a thick glowing core shell
-      const r = 2.2 + (Math.random() - 0.5) * 0.4;
-      
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = r * Math.cos(phi);
+        for (let i = 0; i < count; i++) {
+          // Golden spiral distribution on sphere for structural points
+          const phi = Math.acos(-1 + (2 * i) / count);
+          const theta = Math.sqrt(count * Math.PI) * phi;
+          
+          // Radius variation to give a thick glowing core shell
+          const r = 2.2 + (Math.random() - 0.5) * 0.4;
+          
+          positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+          positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+          positions[i * 3 + 2] = r * Math.cos(phi);
 
-      // Color blending (cyan, purple, and indigo)
-      let mixedColor;
-      if (Math.random() < 0.4) {
-        mixedColor = colorSecondary.clone().lerp(colorPrimary, Math.random());
-      } else {
-        mixedColor = colorPrimary.clone().lerp(colorPurple, Math.random());
+          // Color blending (cyan, purple, and indigo)
+          let mixedColor;
+          if (Math.random() < 0.4) {
+            mixedColor = colorSecondary.clone().lerp(colorPrimary, Math.random());
+          } else {
+            mixedColor = colorPrimary.clone().lerp(colorPurple, Math.random());
+          }
+          colors[i * 3] = mixedColor.r;
+          colors[i * 3 + 1] = mixedColor.g;
+          colors[i * 3 + 2] = mixedColor.b;
+        }
+
+        const globeGeom = new THREE.BufferGeometry();
+        globeGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        globeGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const globeMaterial = new THREE.PointsMaterial({
+          size: 0.08,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.8,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          map: particleTexture
+        });
+
+        const globePoints = new THREE.Points(globeGeom, globeMaterial);
+        coreGroup.add(globePoints);
+
+        // ==========================================
+        // INTERACTION & RENDER PHYSICS LOOP
+        // ==========================================
+        let mouseX = 0, mouseY = 0;
+        let targetMouseX = 0, targetMouseY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+          targetMouseX = (e.clientX - window.innerWidth / 2) * 0.0015;
+          targetMouseY = (e.clientY - window.innerHeight / 2) * 0.0015;
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          const elapsedTime = clock.getElapsedTime();
+          const time = elapsedTime;
+
+          // Spin globe
+          globePoints.rotation.y = time * 0.08;
+          globePoints.rotation.x = time * 0.03;
+
+          // Globe breathing pulsation
+          const pulse = 1.0 + Math.sin(time * 3.5) * 0.06;
+          globePoints.scale.set(pulse, pulse, pulse);
+
+          // Mouse interactive sways with damping
+          mouseX += (targetMouseX - mouseX) * 0.06;
+          mouseY += (targetMouseY - mouseY) * 0.06;
+
+          coreGroup.rotation.y = mouseX * 0.8;
+          coreGroup.rotation.x = mouseY * 0.8;
+
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        // Viewport Resizing
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        });
+
+        // ==========================================
+        // GSAP SCROLL-DRIVEN CAMERA & GLOBE TIMELINE
+        // ==========================================
+        
+        // Responsive coordinates
+        const isMobile = window.innerWidth < 992;
+        const initialX = isMobile ? 0 : 2.2;
+        const initialY = isMobile ? -0.8 : 0;
+        const initialScale = isMobile ? 0.75 : 1.1;
+
+        coreGroup.position.set(initialX, initialY, 0);
+        coreGroup.scale.set(initialScale, initialScale, initialScale);
+
+        // Master Scroll trigger timeline
+        const scrollTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: "main",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1.5, // High scrub factor for buttery scroll physics
+          }
+        });
+
+        if (isMobile) {
+          scrollTimeline
+            // --- PHASE 1: Scroll to "Who We Are" ---
+            .to(coreGroup.position, { x: 0, y: 1.0, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 0)
+            .to(coreGroup.scale, { x: 0.65, y: 0.65, z: 0.65, ease: "power2.inOut", duration: 2.5 }, 0)
+
+            // --- PHASE 2: Scroll to "Services" ---
+            .to(coreGroup.position, { x: 0, y: -0.8, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 2.5)
+            .to(coreGroup.scale, { x: 0.8, y: 0.8, z: 0.8, ease: "power2.inOut", duration: 2.5 }, 2.5)
+
+            // --- PHASE 3: Scroll to "Approach/Mission" ---
+            .to(coreGroup.position, { x: 0, y: 0.8, z: -1.0, ease: "power2.inOut", duration: 2.5 }, 5.0)
+            .to(coreGroup.scale, { x: 0.6, y: 0.6, z: 0.6, ease: "power2.inOut", duration: 2.5 }, 5.0)
+
+            // --- PHASE 4: Scroll to "Contact" ---
+            .to(coreGroup.position, { x: 0, y: 0, z: 2.0, ease: "power2.inOut", duration: 2.5 }, 7.5)
+            .to(coreGroup.scale, { x: 1.8, y: 1.8, z: 1.8, ease: "power2.inOut", duration: 2.5 }, 7.5);
+        } else {
+          scrollTimeline
+            // --- PHASE 1: Scroll to "Who We Are" ---
+            .to(coreGroup.position, { x: -2.0, y: 0.4, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 0)
+            .to(coreGroup.scale, { x: 0.9, y: 0.9, z: 0.9, ease: "power2.inOut", duration: 2.5 }, 0)
+
+            // --- PHASE 2: Scroll to "Services" ---
+            .to(coreGroup.position, { x: 2.0, y: -0.4, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 2.5)
+            .to(coreGroup.scale, { x: 1.15, y: 1.15, z: 1.15, ease: "power2.inOut", duration: 2.5 }, 2.5)
+
+            // --- PHASE 3: Scroll to "Approach/Mission" ---
+            .to(coreGroup.position, { x: -1.8, y: 0.2, z: -1.0, ease: "power2.inOut", duration: 2.5 }, 5.0)
+            .to(coreGroup.scale, { x: 0.85, y: 0.85, z: 0.85, ease: "power2.inOut", duration: 2.5 }, 5.0)
+
+            // --- PHASE 4: Scroll to "Contact" ---
+            .to(coreGroup.position, { x: 0, y: 0, z: 2.5, ease: "power2.inOut", duration: 2.5 }, 7.5)
+            .to(coreGroup.scale, { x: 2.5, y: 2.5, z: 2.5, ease: "power2.inOut", duration: 2.5 }, 7.5);
+        }
       }
-      colors[i * 3] = mixedColor.r;
-      colors[i * 3 + 1] = mixedColor.g;
-      colors[i * 3 + 2] = mixedColor.b;
+    } catch (e) {
+      console.warn("WebGL/Three.js failed to initialize on this device. Dynamic globe rendering has been disabled: ", e);
+      const canvasEl = document.getElementById('webgl-canvas');
+      if (canvasEl) canvasEl.style.display = 'none';
     }
-
-    const globeGeom = new THREE.BufferGeometry();
-    globeGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    globeGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const globeMaterial = new THREE.PointsMaterial({
-      size: 0.08,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      map: particleTexture
-    });
-
-    const globePoints = new THREE.Points(globeGeom, globeMaterial);
-    coreGroup.add(globePoints);
-
-
-    // ==========================================
-    // INTERACTION & RENDER PHYSICS LOOP
-    // ==========================================
-    let mouseX = 0, mouseY = 0;
-    let targetMouseX = 0, targetMouseY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-      targetMouseX = (e.clientX - window.innerWidth / 2) * 0.0015;
-      targetMouseY = (e.clientY - window.innerHeight / 2) * 0.0015;
-    });
-
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      const elapsedTime = clock.getElapsedTime();
-      const time = elapsedTime;
-
-      // Spin globe
-      globePoints.rotation.y = time * 0.08;
-      globePoints.rotation.x = time * 0.03;
-
-      // Globe breathing pulsation
-      const pulse = 1.0 + Math.sin(time * 3.5) * 0.06;
-      globePoints.scale.set(pulse, pulse, pulse);
-
-      // Mouse interactive sways with damping
-      mouseX += (targetMouseX - mouseX) * 0.06;
-      mouseY += (targetMouseY - mouseY) * 0.06;
-
-      coreGroup.rotation.y = mouseX * 0.8;
-      coreGroup.rotation.x = mouseY * 0.8;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Viewport Resizing
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    });
-
-
-    // ==========================================
-    // GSAP SCROLL-DRIVEN CAMERA & GLOBE TIMELINE
-    // ==========================================
-    
-    // Set Initial Position:
-    // Globe Starts on the right side of the screen
-    coreGroup.position.set(2.2, 0, 0);
-    coreGroup.scale.set(1.1, 1.1, 1.1);
-
-    // Master Scroll trigger timeline
-    const scrollTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "main",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.5, // High scrub factor for buttery scroll physics
-      }
-    });
-
-    scrollTimeline
-      // --- PHASE 1: Scroll to "Who We Are" ---
-      // Globe shifts left to lead the scroll, behind the bento grid
-      .to(coreGroup.position, { x: -2.0, y: 0.4, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 0)
-      .to(coreGroup.scale, { x: 0.9, y: 0.9, z: 0.9, ease: "power2.inOut", duration: 2.5 }, 0)
-
-      // --- PHASE 2: Scroll to "Services" ---
-      // Globe shifts right to lead behind the services cards
-      .to(coreGroup.position, { x: 2.0, y: -0.4, z: -0.5, ease: "power2.inOut", duration: 2.5 }, 2.5)
-      .to(coreGroup.scale, { x: 1.15, y: 1.15, z: 1.15, ease: "power2.inOut", duration: 2.5 }, 2.5)
-
-      // --- PHASE 3: Scroll to "Approach/Mission" ---
-      // Globe shifts left behind the steps and founder profile
-      .to(coreGroup.position, { x: -1.8, y: 0.2, z: -1.0, ease: "power2.inOut", duration: 2.5 }, 5.0)
-      .to(coreGroup.scale, { x: 0.85, y: 0.85, z: 0.85, ease: "power2.inOut", duration: 2.5 }, 5.0)
-
-      // --- PHASE 4: Scroll to "Contact" (End of Scroll) ---
-      // Globe zooms in massively to center stage, dispersing particles across the viewport
-      .to(coreGroup.position, { x: 0, y: 0, z: 2.5, ease: "power2.inOut", duration: 2.5 }, 7.5)
-      .to(coreGroup.scale, { x: 2.5, y: 2.5, z: 2.5, ease: "power2.inOut", duration: 2.5 }, 7.5);
 
 
     // ==========================================
@@ -1413,6 +1450,57 @@
       );
     });
 
+    // ==========================================
+    // WORKSPACE SHOWCASE ENTRANCE ANIMATIONS
+    // ==========================================
+    gsap.fromTo('.showcase-card', 
+      { opacity: 0, scale: 0.92, y: 35 },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        y: 0, 
+        duration: 1.1, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: '.showcase',
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+
+    gsap.fromTo('.showcase-desc, .showcase-btn',
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: '.showcase',
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+
+    gsap.fromTo('.showcase-item',
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: '.showcase-list',
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+
 
     // ==========================================
     // INTERSTELLAR CINEMATIC ORGAN AUDIO SYNTH
@@ -1435,6 +1523,76 @@
     let chordIdx = 0;
 
     const spaceMelody = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33];
+
+    let lastSwellTime = 0;
+    let noiseBuffer = null;
+
+    function playCinematicSwell() {
+      if (!audioCtx || audioCtx.state === 'suspended' || !isPlaying) return;
+      
+      const now = audioCtx.currentTime;
+      if (now - lastSwellTime < 2.0) return;
+      lastSwellTime = now;
+
+      try {
+        // Initialize noise source buffer for wing flap feather whooshes
+        if (!noiseBuffer) {
+          const bufferSize = audioCtx.sampleRate * 1.5;
+          noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const data = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < data.length; i++) {
+            data[i] = Math.random() * 2 - 1;
+          }
+        }
+
+        // Synthesize 3 consecutive wing flaps (takeoff sequence)
+        const flapIntervals = [0, 0.22, 0.44];
+        flapIntervals.forEach((delay, index) => {
+          const startTime = now + delay;
+          
+          const noiseNode = audioCtx.createBufferSource();
+          noiseNode.buffer = noiseBuffer;
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.Q.setValueAtTime(3.0, startTime);
+          
+          // Modulate filter frequency to simulate wing downstroke whoosh
+          filter.frequency.setValueAtTime(150, startTime);
+          filter.frequency.exponentialRampToValueAtTime(800 - index * 100, startTime + 0.08);
+          filter.frequency.exponentialRampToValueAtTime(100, startTime + 0.18);
+
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.setValueAtTime(0, startTime);
+          gainNode.gain.linearRampToValueAtTime(0.09 - index * 0.02, startTime + 0.06); // softens as it flies away
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.20);
+
+          // Connect stereo panner to simulate flight direction (left to right)
+          let panner = null;
+          if (typeof audioCtx.createStereoPanner === 'function') {
+            panner = audioCtx.createStereoPanner();
+            const panVal = -0.6 + index * 0.5;
+            panner.pan.setValueAtTime(panVal, startTime);
+          }
+
+          if (panner) {
+            noiseNode.connect(filter);
+            filter.connect(panner);
+            panner.connect(gainNode);
+          } else {
+            noiseNode.connect(filter);
+            filter.connect(gainNode);
+          }
+
+          gainNode.connect(audioCtx.destination);
+          
+          noiseNode.start(startTime);
+          noiseNode.stop(startTime + 0.22);
+        });
+      } catch (e) {
+        console.warn("Futuristic bird takeoff synthesis failed: ", e);
+      }
+    }
 
     function initAudio() {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1579,14 +1737,14 @@
     let lenis;
     function initLenis() {
       lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.1,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
         mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
+        smoothTouch: true, // Smooth touch support across mobile devices
+        touchMultiplier: 1.5,
         infinite: false,
       });
 
@@ -1602,6 +1760,46 @@
         lenis.raf(time * 1000);
       });
       gsap.ticker.lagSmoothing(0);
+
+      // Handle anchor links scroll using Lenis
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            
+            const isMobileLink = this.hasAttribute('data-bs-dismiss') || this.closest('.offcanvas');
+            
+            if (isMobileLink) {
+              // Programmatically hide the Bootstrap Offcanvas menu
+              const offcanvasEl = document.getElementById('mobileNav');
+              if (offcanvasEl && typeof bootstrap !== 'undefined') {
+                const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
+                if (bsOffcanvas) {
+                  bsOffcanvas.hide();
+                }
+              }
+              
+              // Wait for offcanvas close transition to complete/start before scrolling
+              setTimeout(() => {
+                if (lenis) {
+                  lenis.scrollTo(target, { offset: -80 });
+                } else {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 250);
+            } else {
+              if (lenis) {
+                lenis.scrollTo(target, { offset: -80 });
+              } else {
+                target.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          }
+        });
+      });
     }
 
     // 2. Interactive Delivery Console Controller
@@ -1914,21 +2112,79 @@
       if (!audioCtx) return;
       try {
         const now = audioCtx.currentTime;
-        const notes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C major arpeggio
+        
+        // 1. Power Swell (Low hum engine charge)
+        const subOsc = audioCtx.createOscillator();
+        const subGain = audioCtx.createGain();
+        const subFilter = audioCtx.createBiquadFilter();
+        
+        subOsc.type = 'sawtooth';
+        subOsc.frequency.setValueAtTime(45, now);
+        subOsc.frequency.linearRampToValueAtTime(140, now + 1.2); // rising hum
+        
+        subFilter.type = 'lowpass';
+        subFilter.frequency.setValueAtTime(120, now);
+        subFilter.frequency.exponentialRampToValueAtTime(350, now + 1.0);
+        
+        subGain.gain.setValueAtTime(0, now);
+        subGain.gain.linearRampToValueAtTime(0.12, now + 0.4);
+        subGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+        
+        subOsc.connect(subFilter);
+        subFilter.connect(subGain);
+        subGain.connect(audioCtx.destination);
+        
+        subOsc.start(now);
+        subOsc.stop(now + 1.5);
+        
+        // 2. High-Tech Charging Laser (Capacitor charge)
+        const chargeOsc = audioCtx.createOscillator();
+        const chargeGain = audioCtx.createGain();
+        
+        chargeOsc.type = 'triangle';
+        chargeOsc.frequency.setValueAtTime(180, now);
+        chargeOsc.frequency.exponentialRampToValueAtTime(1500, now + 1.1); // exponential pitch charge
+        
+        // Fast vibrato to sound digital
+        const lfo = audioCtx.createOscillator();
+        const lfoGain = audioCtx.createGain();
+        lfo.frequency.setValueAtTime(50, now); // 50Hz vibrato
+        lfoGain.gain.setValueAtTime(60, now);
+        lfo.connect(lfoGain);
+        lfoGain.connect(chargeOsc.frequency);
+        
+        chargeGain.gain.setValueAtTime(0, now);
+        chargeGain.gain.linearRampToValueAtTime(0.04, now + 0.6);
+        chargeGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+        
+        chargeOsc.connect(chargeGain);
+        chargeGain.connect(audioCtx.destination);
+        
+        lfo.start(now);
+        chargeOsc.start(now);
+        lfo.stop(now + 1.25);
+        chargeOsc.stop(now + 1.25);
+
+        // 3. System Online Resolve (Futuristic Digital Arpeggio)
+        // Starts at 0.9s (as the charge peaks) and plays a clean, bright cyber chime
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
         notes.forEach((freq, idx) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
           
-          gain.gain.setValueAtTime(0, now + idx * 0.08);
-          gain.gain.linearRampToValueAtTime(0.04, now + idx * 0.08 + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 0.6);
+          const timeOffset = 0.9 + idx * 0.06;
+          osc.frequency.setValueAtTime(freq, now + timeOffset);
+          
+          gain.gain.setValueAtTime(0, now + timeOffset);
+          gain.gain.linearRampToValueAtTime(0.035, now + timeOffset + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + timeOffset + 0.5);
           
           osc.connect(gain);
           gain.connect(audioCtx.destination);
-          osc.start(now + idx * 0.08);
-          osc.stop(now + idx * 0.08 + 0.7);
+          
+          osc.start(now + timeOffset);
+          osc.stop(now + timeOffset + 0.6);
         });
       } catch (e) {
         console.warn("Activation chime synth failed: ", e);
@@ -2052,10 +2308,12 @@
           })
           .set(bootOverlay, { display: 'none' });
           
-        gsap.fromTo(coreGroup.position, 
-          { z: -8 }, 
-          { z: 0, duration: 2.2, ease: "power3.out", delay: 0.2 }
-        );
+        if (coreGroup) {
+          gsap.fromTo(coreGroup.position, 
+            { z: -8 }, 
+            { z: 0, duration: 2.2, ease: "power3.out", delay: 0.2 }
+          );
+        }
       });
     }
 
