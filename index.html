@@ -1112,8 +1112,14 @@
     // Global handle for WebGL core group reference
     let coreGroup = null;
 
-    // Register GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
+    // Register GSAP ScrollTrigger safely
+    try {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+    } catch (e) {
+      console.warn("ScrollTrigger registration failed: ", e);
+    }
 
     // 1. Current Year Footer Update
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -1428,78 +1434,84 @@
       });
     }
 
-    const revealHeaders = document.querySelectorAll('.text-reveal-target');
-    revealHeaders.forEach(header => {
-      splitTextToSpans(header);
+    try {
+      if (typeof gsap !== 'undefined') {
+        const revealHeaders = document.querySelectorAll('.text-reveal-target');
+        revealHeaders.forEach(header => {
+          splitTextToSpans(header);
 
-      const chars = header.querySelectorAll('.char-reveal');
-      gsap.fromTo(chars, 
-        { y: "100%", opacity: 0 },
-        { 
-          y: "0%", 
-          opacity: 1, 
-          duration: 0.8, 
-          stagger: 0.02, 
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: header,
-            start: "top 85%",
-            toggleActions: "play none none none"
+          const chars = header.querySelectorAll('.char-reveal');
+          gsap.fromTo(chars, 
+            { y: "100%", opacity: 0 },
+            { 
+              y: "0%", 
+              opacity: 1, 
+              duration: 0.8, 
+              stagger: 0.02, 
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: header,
+                start: "top 85%",
+                toggleActions: "play none none none"
+              }
+            }
+          );
+        });
+
+        // ==========================================
+        // WORKSPACE SHOWCASE ENTRANCE ANIMATIONS
+        // ==========================================
+        gsap.fromTo('.showcase-card', 
+          { opacity: 0, scale: 0.92, y: 35 },
+          { 
+            opacity: 1, 
+            scale: 1, 
+            y: 0, 
+            duration: 1.1, 
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: '.showcase',
+              start: "top 75%",
+              toggleActions: "play none none none"
+            }
           }
-        }
-      );
-    });
+        );
 
-    // ==========================================
-    // WORKSPACE SHOWCASE ENTRANCE ANIMATIONS
-    // ==========================================
-    gsap.fromTo('.showcase-card', 
-      { opacity: 0, scale: 0.92, y: 35 },
-      { 
-        opacity: 1, 
-        scale: 1, 
-        y: 0, 
-        duration: 1.1, 
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: '.showcase',
-          start: "top 75%",
-          toggleActions: "play none none none"
-        }
-      }
-    );
+        gsap.fromTo('.showcase-desc, .showcase-btn',
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: '.showcase',
+              start: "top 75%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
 
-    gsap.fromTo('.showcase-desc, .showcase-btn',
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: '.showcase',
-          start: "top 75%",
-          toggleActions: "play none none none"
-        }
+        gsap.fromTo('.showcase-item',
+          { opacity: 0, x: -20 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: '.showcase-list',
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
       }
-    );
-
-    gsap.fromTo('.showcase-item',
-      { opacity: 0, x: -20 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: '.showcase-list',
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      }
-    );
+    } catch (e) {
+      console.warn("GSAP layout animations failed: ", e);
+    }
 
 
     // ==========================================
@@ -1595,137 +1607,165 @@
     }
 
     function initAudio() {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      
-      masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+          console.warn("AudioContext is not supported in this browser.");
+          return;
+        }
+        audioCtx = new AudioContextClass();
+        
+        masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
 
-      filterNode = audioCtx.createBiquadFilter();
-      filterNode.type = 'lowpass';
-      filterNode.frequency.setValueAtTime(350, audioCtx.currentTime);
-      filterNode.Q.setValueAtTime(2.0, audioCtx.currentTime);
+        filterNode = audioCtx.createBiquadFilter();
+        filterNode.type = 'lowpass';
+        filterNode.frequency.setValueAtTime(350, audioCtx.currentTime);
+        filterNode.Q.setValueAtTime(2.0, audioCtx.currentTime);
 
-      delayNode = audioCtx.createDelay(2.0);
-      delayNode.delayTime.setValueAtTime(0.8, audioCtx.currentTime);
-      
-      feedbackGain = audioCtx.createGain();
-      feedbackGain.gain.setValueAtTime(0.55, audioCtx.currentTime);
+        delayNode = audioCtx.createDelay(2.0);
+        delayNode.delayTime.setValueAtTime(0.8, audioCtx.currentTime);
+        
+        feedbackGain = audioCtx.createGain();
+        feedbackGain.gain.setValueAtTime(0.55, audioCtx.currentTime);
 
-      delayNode.connect(feedbackGain);
-      feedbackGain.connect(delayNode);
+        delayNode.connect(feedbackGain);
+        feedbackGain.connect(delayNode);
 
-      filterNode.connect(masterGain);
-      filterNode.connect(delayNode);
-      delayNode.connect(masterGain);
-      
-      masterGain.connect(audioCtx.destination);
+        filterNode.connect(masterGain);
+        filterNode.connect(delayNode);
+        delayNode.connect(masterGain);
+        
+        masterGain.connect(audioCtx.destination);
+      } catch (e) {
+        console.warn("AudioContext initialization failed: ", e);
+        audioCtx = null;
+      }
     }
 
     function playMelodyNote() {
-      if (!isPlaying) return;
+      if (!isPlaying || !audioCtx || !filterNode) return;
 
-      const now = audioCtx.currentTime;
-      const freq = spaceMelody[Math.floor(Math.random() * spaceMelody.length)];
-      
-      const osc1 = audioCtx.createOscillator();
-      const osc2 = audioCtx.createOscillator();
-      const voiceGain = audioCtx.createGain();
+      try {
+        const now = audioCtx.currentTime;
+        const freq = spaceMelody[Math.floor(Math.random() * spaceMelody.length)];
+        
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const voiceGain = audioCtx.createGain();
 
-      osc1.type = 'sine';
-      osc2.type = 'triangle';
-      
-      osc1.frequency.setValueAtTime(freq - 0.7, now);
-      osc2.frequency.setValueAtTime(freq + 0.7, now);
+        osc1.type = 'sine';
+        osc2.type = 'triangle';
+        
+        osc1.frequency.setValueAtTime(freq - 0.7, now);
+        osc2.frequency.setValueAtTime(freq + 0.7, now);
 
-      voiceGain.gain.setValueAtTime(0, now);
-      voiceGain.gain.linearRampToValueAtTime(0.02, now + 1.2);
-      voiceGain.gain.setValueAtTime(0.02, now + 3.0);
-      voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 5.0);
+        voiceGain.gain.setValueAtTime(0, now);
+        voiceGain.gain.linearRampToValueAtTime(0.02, now + 1.2);
+        voiceGain.gain.setValueAtTime(0.02, now + 3.0);
+        voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 5.0);
 
-      osc1.connect(voiceGain);
-      osc2.connect(voiceGain);
-      voiceGain.connect(filterNode);
+        osc1.connect(voiceGain);
+        osc2.connect(voiceGain);
+        voiceGain.connect(filterNode);
 
-      osc1.start(now);
-      osc2.start(now);
-      
-      osc1.stop(now + 6.0);
-      osc2.stop(now + 6.0);
+        osc1.start(now);
+        osc2.start(now);
+        
+        osc1.stop(now + 6.0);
+        osc2.stop(now + 6.0);
 
-      setTimeout(playMelodyNote, 4000 + Math.random() * 4000);
+        setTimeout(playMelodyNote, 4000 + Math.random() * 4000);
+      } catch (e) {
+        console.warn("playMelodyNote synthesis failed: ", e);
+      }
     }
 
     function playInterstellarChord() {
-      if (!isPlaying) return;
+      if (!isPlaying || !audioCtx || !filterNode) return;
 
-      const chord = interstellarChords[chordIdx];
-      const now = audioCtx.currentTime;
-      const duration = 8.5;
+      try {
+        const chord = interstellarChords[chordIdx];
+        const now = audioCtx.currentTime;
+        const duration = 8.5;
 
-      filterNode.frequency.cancelScheduledValues(now);
-      filterNode.frequency.setValueAtTime(250, now);
-      filterNode.frequency.exponentialRampToValueAtTime(800, now + duration * 0.45);
-      filterNode.frequency.exponentialRampToValueAtTime(250, now + duration - 0.5);
+        filterNode.frequency.cancelScheduledValues(now);
+        filterNode.frequency.setValueAtTime(250, now);
+        filterNode.frequency.exponentialRampToValueAtTime(800, now + duration * 0.45);
+        filterNode.frequency.exponentialRampToValueAtTime(250, now + duration - 0.5);
 
-      chord.forEach((freq, idx) => {
-        const osc = audioCtx.createOscillator();
-        const oscDetune = audioCtx.createOscillator();
-        const voiceGain = audioCtx.createGain();
+        chord.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const oscDetune = audioCtx.createOscillator();
+          const voiceGain = audioCtx.createGain();
 
-        osc.type = 'triangle';
-        oscDetune.type = 'triangle';
+          osc.type = 'triangle';
+          oscDetune.type = 'triangle';
 
-        osc.frequency.setValueAtTime(freq, now);
-        oscDetune.frequency.setValueAtTime(freq * 1.003 + (Math.random() - 0.5) * 0.2, now);
+          osc.frequency.setValueAtTime(freq, now);
+          oscDetune.frequency.setValueAtTime(freq * 1.003 + (Math.random() - 0.5) * 0.2, now);
 
-        voiceGain.gain.setValueAtTime(0, now);
-        const maxGain = idx < 2 ? 0.05 : 0.02;
-        voiceGain.gain.linearRampToValueAtTime(maxGain, now + 3.0 + Math.random() * 0.5); 
-        voiceGain.gain.setValueAtTime(maxGain, now + duration - 2.5);
-        voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+          voiceGain.gain.setValueAtTime(0, now);
+          const maxGain = idx < 2 ? 0.05 : 0.02;
+          voiceGain.gain.linearRampToValueAtTime(maxGain, now + 3.0 + Math.random() * 0.5); 
+          voiceGain.gain.setValueAtTime(maxGain, now + duration - 2.5);
+          voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
-        osc.connect(voiceGain);
-        oscDetune.connect(voiceGain);
-        voiceGain.connect(filterNode);
+          osc.connect(voiceGain);
+          oscDetune.connect(voiceGain);
+          voiceGain.connect(filterNode);
 
-        osc.start(now);
-        oscDetune.start(now);
-        
-        osc.stop(now + duration);
-        oscDetune.stop(now + duration);
-      });
+          osc.start(now);
+          oscDetune.start(now);
+          
+          osc.stop(now + duration);
+          oscDetune.stop(now + duration);
+        });
 
-      chordIdx = (chordIdx + 1) % interstellarChords.length;
-      playTimeout = setTimeout(playInterstellarChord, (duration - 1.0) * 1000);
+        chordIdx = (chordIdx + 1) % interstellarChords.length;
+        playTimeout = setTimeout(playInterstellarChord, (duration - 1.0) * 1000);
+      } catch (e) {
+        console.warn("playInterstellarChord synthesis failed: ", e);
+      }
     }
 
     const audioToggleBtn = document.getElementById('audio-toggle');
     
-    audioToggleBtn.addEventListener('click', () => {
-      if (!audioCtx) initAudio();
+    if (audioToggleBtn) {
+      audioToggleBtn.addEventListener('click', () => {
+        if (!audioCtx) initAudio();
+        if (!audioCtx || !masterGain) {
+          console.warn("Audio Context or Master Gain is not initialized.");
+          return;
+        }
 
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+        try {
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
 
-      if (isPlaying) {
-        isPlaying = false;
-        audioToggleBtn.classList.remove('audio-active');
-        clearTimeout(playTimeout);
-        
-        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-        masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
-      } else {
-        isPlaying = true;
-        audioToggleBtn.classList.add('audio-active');
-        
-        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-        masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 2.0);
-        
-        playInterstellarChord();
-        setTimeout(playMelodyNote, 2000);
-      }
-    });
+          if (isPlaying) {
+            isPlaying = false;
+            audioToggleBtn.classList.remove('audio-active');
+            clearTimeout(playTimeout);
+            
+            masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+            masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
+          } else {
+            isPlaying = true;
+            audioToggleBtn.classList.add('audio-active');
+            
+            masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+            masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 2.0);
+            
+            playInterstellarChord();
+            setTimeout(playMelodyNote, 2000);
+          }
+        } catch (e) {
+          console.warn("Audio toggle event handler failed: ", e);
+        }
+      });
+    }
 
 
 
@@ -1736,30 +1776,44 @@
     // 1. Lenis Smooth Scrolling Engine
     let lenis;
     function initLenis() {
-      lenis = new Lenis({
-        duration: 1.1,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: true, // Smooth touch support across mobile devices
-        touchMultiplier: 1.5,
-        infinite: false,
-      });
+      try {
+        if (typeof Lenis === 'undefined') {
+          console.warn("Lenis smooth scroll library is not loaded.");
+          return;
+        }
 
-      function raf(time) {
-        lenis.raf(time);
+        lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1,
+          smoothTouch: true, // Smooth touch support across mobile devices
+          touchMultiplier: 1.5,
+          infinite: false,
+        });
+
+        function raf(time) {
+          if (lenis) lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
 
-      // Link Lenis scroll triggers to GSAP ScrollTrigger updates
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
-      gsap.ticker.lagSmoothing(0);
+        // Link Lenis scroll triggers to GSAP ScrollTrigger updates
+        if (typeof ScrollTrigger !== 'undefined') {
+          lenis.on('scroll', ScrollTrigger.update);
+        }
+        
+        if (typeof gsap !== 'undefined') {
+          gsap.ticker.add((time) => {
+            if (lenis) lenis.raf(time * 1000);
+          });
+          gsap.ticker.lagSmoothing(0);
+        }
+      } catch (e) {
+        console.warn("Lenis initialization failed: ", e);
+      }
 
       // Handle anchor links scroll using Lenis
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1936,72 +1990,88 @@
         fadeElements.push('#console-checklist');
       }
 
-      // GSAP animation to fade out content before updating
-      gsap.to(fadeElements, {
-        opacity: 0,
-        y: 6,
-        duration: 0.15,
-        stagger: 0.015,
-        onComplete: () => {
-          // Update text values
-          badgeEl.textContent = data.badge;
-          titleEl.textContent = data.title;
-          subtitleEl.textContent = data.subtitle;
+      function applyUpdates() {
+        // Update text values
+        badgeEl.textContent = data.badge;
+        titleEl.textContent = data.title;
+        subtitleEl.textContent = data.subtitle;
 
-          // Update status badge
-          statusTextEl.textContent = data.status;
-          statusTextEl.style.color = data.statusColor;
-          statusBadgeEl.style.backgroundColor = data.statusBg;
-          statusBadgeEl.style.borderColor = data.statusBorder;
-          statusBadgeEl.querySelector('span').style.backgroundColor = data.statusColor;
+        // Update status badge
+        statusTextEl.textContent = data.status;
+        statusTextEl.style.color = data.statusColor;
+        statusBadgeEl.style.backgroundColor = data.statusBg;
+        statusBadgeEl.style.borderColor = data.statusBorder;
+        statusBadgeEl.querySelector('span').style.backgroundColor = data.statusColor;
 
-          // Update progress
-          progressTextEl.textContent = data.progress;
-          progressBarEl.style.width = data.progress;
+        // Update progress
+        progressTextEl.textContent = data.progress;
+        progressBarEl.style.width = data.progress;
 
-          // Toggle visibility of checklist vs audit scorecard
-          if (stepNum === 1) {
-            checklistEl.style.display = 'none';
-            auditSystemEl.style.display = 'block';
-            renderAuditSystem();
-          } else {
-            auditSystemEl.style.display = 'none';
-            checklistEl.style.display = 'grid';
+        // Toggle visibility of checklist vs audit scorecard
+        if (stepNum === 1) {
+          checklistEl.style.display = 'none';
+          auditSystemEl.style.display = 'block';
+          renderAuditSystem();
+        } else {
+          auditSystemEl.style.display = 'none';
+          checklistEl.style.display = 'grid';
 
-            // Update checklist list
-            checklistEl.innerHTML = data.tasks.map(task => `
-              <li class="d-flex gap-3 align-items-center">
-                <span style="font-family: var(--font-mono); font-size: 10px; color: ${task.checked ? '#10B981' : '#4B5563'}; border: 1px solid ${task.checked ? 'rgba(16, 185, 129, 0.3)' : 'rgba(75, 85, 99, 0.3)'}; padding: 0.2rem 0.5rem; background: ${task.checked ? 'rgba(16, 185, 129, 0.08)' : 'rgba(75, 85, 99, 0.08)'}; border-radius: 6px; font-weight: 700; user-select: none; letter-spacing: 0.5px;">
-                  ${task.checked ? '✓ DONE' : '— PENDING'}
-                </span>
-                <span style="font-size: 13.5px; color: ${task.checked ? 'var(--text-primary)' : 'var(--text-secondary)'}; font-weight: ${task.checked ? '500' : 'normal'};">
-                  ${task.text}
-                </span>
-              </li>
-            `).join('');
-          }
-
-          // Update logs
-          logLinesEl.innerHTML = data.logs.map(log => `
-            <div style="margin-bottom: 0.25rem;"><span style="color: var(--accent-primary)">&gt;</span> ${log}</div>
+          // Update checklist list
+          checklistEl.innerHTML = data.tasks.map(task => `
+            <li class="d-flex gap-3 align-items-center">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: ${task.checked ? '#10B981' : '#4B5563'}; border: 1px solid ${task.checked ? 'rgba(16, 185, 129, 0.3)' : 'rgba(75, 85, 99, 0.3)'}; padding: 0.2rem 0.5rem; background: ${task.checked ? 'rgba(16, 185, 129, 0.08)' : 'rgba(75, 85, 99, 0.08)'}; border-radius: 6px; font-weight: 700; user-select: none; letter-spacing: 0.5px;">
+                ${task.checked ? '✓ DONE' : '— PENDING'}
+              </span>
+              <span style="font-size: 13.5px; color: ${task.checked ? 'var(--text-primary)' : 'var(--text-secondary)'}; font-weight: ${task.checked ? '500' : 'normal'};">
+                ${task.text}
+              </span>
+            </li>
           `).join('');
-
-          // Fade content back in
-          const showElements = ['#console-phase-badge', '#console-title', '#console-subtitle', '#console-log-lines'];
-          if (stepNum === 1) {
-            showElements.push('#console-audit-system');
-          } else {
-            showElements.push('#console-checklist');
-          }
-
-          gsap.to(showElements, {
-            opacity: 1,
-            y: 0,
-            duration: 0.25,
-            stagger: 0.015
-          });
         }
-      });
+
+        // Update logs
+        logLinesEl.innerHTML = data.logs.map(log => `
+          <div style="margin-bottom: 0.25rem;"><span style="color: var(--accent-primary)">&gt;</span> ${log}</div>
+        `).join('');
+      }
+
+      if (typeof gsap !== 'undefined') {
+        // GSAP animation to fade out content before updating
+        gsap.to(fadeElements, {
+          opacity: 0,
+          y: 6,
+          duration: 0.15,
+          stagger: 0.015,
+          onComplete: () => {
+            applyUpdates();
+
+            // Fade content back in
+            const showElements = ['#console-phase-badge', '#console-title', '#console-subtitle', '#console-log-lines'];
+            if (stepNum === 1) {
+              showElements.push('#console-audit-system');
+            } else {
+              showElements.push('#console-checklist');
+            }
+
+            gsap.to(showElements, {
+              opacity: 1,
+              y: 0,
+              duration: 0.25,
+              stagger: 0.015
+            });
+          }
+        });
+      } else {
+        // Fallback update without animations if GSAP is blocked/missing
+        applyUpdates();
+        try {
+          const allFadeEls = document.querySelectorAll(fadeElements.join(','));
+          allFadeEls.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+        } catch (err) {}
+      }
     }
 
     function initInteractiveTimeline() {
@@ -2218,16 +2288,22 @@
       function revealNextStep() {
         if (currentStep >= bootSteps.length) {
           // Final fade out of status text, then show button
-          gsap.to(statusText, {
-            opacity: 0, y: 8, filter: 'blur(6px)', duration: 0.4, ease: 'power3.inOut',
-            onComplete: () => {
-              activateBtn.style.display = 'inline-flex';
-              gsap.fromTo(activateBtn, 
-                { opacity: 0, scale: 0.9, y: 10 },
-                { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }
-              );
-            }
-          });
+          if (typeof gsap !== 'undefined') {
+            gsap.to(statusText, {
+              opacity: 0, y: 8, filter: 'blur(6px)', duration: 0.4, ease: 'power3.inOut',
+              onComplete: () => {
+                activateBtn.style.display = 'inline-flex';
+                gsap.fromTo(activateBtn, 
+                  { opacity: 0, scale: 0.9, y: 10 },
+                  { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }
+                );
+              }
+            });
+          } else {
+            statusText.style.display = 'none';
+            activateBtn.style.display = 'inline-flex';
+            activateBtn.style.opacity = '1';
+          }
           return;
         }
 
@@ -2236,42 +2312,51 @@
         // Animate percentage counter
         const prevPct = currentStep > 0 ? bootSteps[currentStep - 1].pct : 0;
         const pctObj = { val: prevPct };
-        gsap.to(pctObj, {
-          val: step.pct,
-          duration: stepDelay / 1000 * 0.8,
-          ease: "power1.out",
-          onUpdate: () => {
-            const v = Math.floor(pctObj.val);
-            progressBar.style.width = v + '%';
-            percentageText.textContent = String(v).padStart(2, '0') + '%';
-          }
-        });
-
-        // Fade+blur reveal animation (same style as hero typed-text)
-        const tl = gsap.timeline({
-          onComplete: () => {
-            currentStep++;
-            setTimeout(revealNextStep, stepDelay * 0.3);
-          }
-        });
-
-        // If not the first step, fade out current text first
-        if (currentStep > 0) {
-          tl.to(statusText, {
-            opacity: 0, y: 6, filter: 'blur(8px)',
-            duration: 0.3, ease: 'power3.inOut'
+        if (typeof gsap !== 'undefined') {
+          gsap.to(pctObj, {
+            val: step.pct,
+            duration: stepDelay / 1000 * 0.8,
+            ease: "power1.out",
+            onUpdate: () => {
+              const v = Math.floor(pctObj.val);
+              progressBar.style.width = v + '%';
+              percentageText.textContent = String(v).padStart(2, '0') + '%';
+            }
           });
-        }
 
-        tl.set(statusText, {
-          textContent: step.text,
-          y: -6,
-          filter: 'blur(8px)'
-        })
-        .to(statusText, {
-          opacity: 1, y: 0, filter: 'blur(0px)',
-          duration: 0.5, ease: 'expo.out'
-        });
+          // Fade+blur reveal animation (same style as hero typed-text)
+          const tl = gsap.timeline({
+            onComplete: () => {
+              currentStep++;
+              setTimeout(revealNextStep, stepDelay * 0.3);
+            }
+          });
+
+          // If not the first step, fade out current text first
+          if (currentStep > 0) {
+            tl.to(statusText, {
+              opacity: 0, y: 6, filter: 'blur(8px)',
+              duration: 0.3, ease: 'power3.inOut'
+            });
+          }
+
+          tl.set(statusText, {
+            textContent: step.text,
+            y: -6,
+            filter: 'blur(8px)'
+          })
+          .to(statusText, {
+            opacity: 1, y: 0, filter: 'blur(0px)',
+            duration: 0.5, ease: 'expo.out'
+          });
+        } else {
+          // Fallback if GSAP is blocked/missing
+          progressBar.style.width = step.pct + '%';
+          percentageText.textContent = String(step.pct).padStart(2, '0') + '%';
+          statusText.textContent = step.text;
+          currentStep++;
+          setTimeout(revealNextStep, stepDelay * 0.3);
+        }
 
         playKeyboardClick();
       }
@@ -2283,36 +2368,47 @@
         playActivationChime();
         
         if (!audioCtx) initAudio();
-        if (audioCtx && audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
         
-        if (!isPlaying) {
-          isPlaying = true;
-          const toggleBtn = document.getElementById('audio-toggle');
-          if (toggleBtn) toggleBtn.classList.add('audio-active');
-          
-          masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-          masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 1.5);
-          
-          playInterstellarChord();
-          setTimeout(playMelodyNote, 1000);
+        try {
+          if (audioCtx) {
+            if (audioCtx.state === 'suspended') {
+              audioCtx.resume();
+            }
+            
+            if (!isPlaying && masterGain) {
+              isPlaying = true;
+              const toggleBtn = document.getElementById('audio-toggle');
+              if (toggleBtn) toggleBtn.classList.add('audio-active');
+              
+              masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+              masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 1.5);
+              
+              playInterstellarChord();
+              setTimeout(playMelodyNote, 1000);
+            }
+          }
+        } catch (err) {
+          console.warn("BGM startup error: ", err);
         }
 
-        gsap.timeline()
-          .to(bootOverlay, {
-            yPercent: -100,
-            opacity: 0,
-            duration: 1.0,
-            ease: "power4.inOut"
-          })
-          .set(bootOverlay, { display: 'none' });
-          
-        if (coreGroup) {
-          gsap.fromTo(coreGroup.position, 
-            { z: -8 }, 
-            { z: 0, duration: 2.2, ease: "power3.out", delay: 0.2 }
-          );
+        if (typeof gsap !== 'undefined') {
+          gsap.timeline()
+            .to(bootOverlay, {
+              yPercent: -100,
+              opacity: 0,
+              duration: 1.0,
+              ease: "power4.inOut"
+            })
+            .set(bootOverlay, { display: 'none' });
+            
+          if (coreGroup) {
+            gsap.fromTo(coreGroup.position, 
+              { z: -8 }, 
+              { z: 0, duration: 2.2, ease: "power3.out", delay: 0.2 }
+            );
+          }
+        } else {
+          bootOverlay.style.display = 'none';
         }
       });
     }
@@ -2932,7 +3028,9 @@
           serviceChips.forEach(c => c.classList.remove('active'));
           chip.classList.add('active');
           selectedService = chip.getAttribute('data-val');
-          gsap.fromTo(chip, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(chip, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+          }
           updateEstimatorOutput();
         });
       });
@@ -2944,7 +3042,9 @@
           scaleChips.forEach(c => c.classList.remove('active'));
           chip.classList.add('active');
           selectedScale = chip.getAttribute('data-val');
-          gsap.fromTo(chip, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(chip, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+          }
           updateEstimatorOutput();
         });
       });
@@ -3060,14 +3160,22 @@
       observer.observe(document.getElementById('founder'));
     }
 
-    // Trigger Initializations on Load
-    initBootLoader();
-    initLenis();
-    initHeroReveal();
-    initInteractiveTimeline();
-    initTerminalLogs();
-    initProjectEstimator();
-    initFounderTypewriter();
+    // Trigger Initializations on Load with Try-Catch isolation
+    function safeInit(name, fn) {
+      try {
+        fn();
+      } catch (e) {
+        console.warn(`Initialization failed for [${name}]: `, e);
+      }
+    }
+
+    safeInit('BootLoader', initBootLoader);
+    safeInit('Lenis', initLenis);
+    safeInit('HeroReveal', initHeroReveal);
+    safeInit('InteractiveTimeline', initInteractiveTimeline);
+    safeInit('TerminalLogs', initTerminalLogs);
+    safeInit('ProjectEstimator', initProjectEstimator);
+    safeInit('FounderTypewriter', initFounderTypewriter);
   </script>
 
   <!-- Active pulse frames for systems indicator -->
