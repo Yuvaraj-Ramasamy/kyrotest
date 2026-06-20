@@ -1799,22 +1799,24 @@
           infinite: false,
         });
 
-        function raf(time) {
-          if (lenis) lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
         // Link Lenis scroll triggers to GSAP ScrollTrigger updates
         if (typeof ScrollTrigger !== 'undefined') {
           lenis.on('scroll', ScrollTrigger.update);
         }
         
         if (typeof gsap !== 'undefined') {
+          // Drive Lenis updates using GSAP ticker to avoid double animation loops
           gsap.ticker.add((time) => {
             if (lenis) lenis.raf(time * 1000);
           });
           gsap.ticker.lagSmoothing(0);
+        } else {
+          // Fallback single requestAnimationFrame loop if GSAP is not available
+          function raf(time) {
+            if (lenis) lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
         }
       } catch (e) {
         console.warn("Lenis initialization failed: ", e);
