@@ -46,8 +46,8 @@
 }
 
 .logo-icon {
-  height: 28px;
-  width: 28px;
+  height: 38px;
+  width: 38px;
   object-fit: contain;
   vertical-align: middle;
   transition: var(--transition-smooth);
