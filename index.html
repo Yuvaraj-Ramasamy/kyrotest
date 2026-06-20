@@ -24,6 +24,11 @@
   <div id="system-boot">
     <div class="boot-container">
       
+      <!-- Brand Logo -->
+      <div style="margin-bottom: -1rem; z-index: 10;">
+        <img src="logo/logo03.png" alt="KyroCore Logo" style="height: 54px; width: 54px; object-fit: contain; mix-blend-mode: screen;">
+      </div>
+      
       <!-- Pulsing Tech HUD Ring -->
       <div class="boot-hud-wrapper">
         <div class="boot-hud-ring ring-outer"></div>
@@ -68,8 +73,9 @@
   <!-- Floating Cinematic Navbar -->
   <header class="topbar">
     <!-- Logo & Title -->
-    <a href="#" class="logo">
-      KYRO<span>CORE</span>
+    <a href="#" class="logo d-flex align-items-center gap-2">
+      <img src="logo/logo03.png" alt="KyroCore Logo" class="logo-icon">
+      <span>KYRO<span>CORE</span></span>
     </a>
 
     <!-- Desktop Navigation -->
@@ -109,7 +115,10 @@
   <!-- Mobile nav Offcanvas -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel" style="background: rgba(2, 3, 8, 0.95); backdrop-filter: blur(24px); border-left: 1px solid var(--border-glass);">
     <div class="offcanvas-header" style="border-bottom: 1px solid var(--border-glass); padding: 1.5rem;">
-      <h5 class="offcanvas-title" id="mobileNavLabel" style="font-weight: 800; letter-spacing: 1px; font-family: var(--font-display);">KYROCORE</h5>
+      <h5 class="offcanvas-title d-flex align-items-center gap-2" id="mobileNavLabel" style="font-weight: 800; letter-spacing: 1px; font-family: var(--font-display);">
+        <img src="logo/logo03.png" alt="KyroCore Logo" class="logo-icon" style="height: 24px; width: 24px;">
+        <span>KYROCORE</span>
+      </h5>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column justify-content-between py-4 px-4">
@@ -1065,6 +1074,7 @@
         
         <div>
           <div class="d-flex align-items-center gap-2">
+            <img src="logo/logo03.png" alt="KyroCore Logo" class="logo-icon" style="height: 24px; width: 24px;">
             <span style="font-weight: 800; font-size: 15px; letter-spacing: 0.5px; font-family: var(--font-display);">KYROCORE TECHNOLOGIES</span>
             <div style="display: inline-flex; align-items: center; gap: 0.25rem; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); padding: 0.25rem 0.65rem; border-radius: 6px;">
               <span style="display:inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-secondary); animation: activePulse 2s infinite;"></span>

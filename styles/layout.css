@@ -45,6 +45,19 @@
   color: var(--accent-primary);
 }
 
+.logo-icon {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  vertical-align: middle;
+  transition: var(--transition-smooth);
+}
+
+.logo:hover .logo-icon {
+  transform: scale(1.08) rotate(5deg);
+}
+
 .nav, .actions {
   display: flex;
   gap: 12px;
