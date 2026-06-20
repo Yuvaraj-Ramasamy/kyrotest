@@ -208,7 +208,7 @@
             <!-- Mini Founder Card -->
             <div class="k-card p-3 d-flex align-items-center gap-3" style="background: rgba(17, 22, 37, 0.95);">
               <div class="founder-photo" style="width: 70px; height: 70px;">
-                <img src="images/profile.png" alt="Yuvaraj Ramasamy" />
+                <img src="images/profile.jpg" alt="Yuvaraj Ramasamy" />
               </div>
               <div>
                 <h3 class="m-0" style="font-size: 14px; font-weight: 700; letter-spacing: 0.5px; font-family: var(--font-display);">YUVARAJ RAMASAMY</h3>
@@ -734,7 +734,7 @@
 
           <div class="col-12 col-lg-6">
             <div class="k-card showcase-card" style="border-radius: 24px; overflow: hidden; border: 1px solid var(--border-line); box-shadow: var(--shadow-premium);">
-              <img src="images/showcase.png" alt="KyroCore Workspace Dashboard Showcase" style="width: 100%; height: auto; display: block;" />
+              <img src="images/showcase.jpg" alt="KyroCore Workspace Dashboard Showcase" style="width: 100%; height: auto; display: block;" />
             </div>
           </div>
 
@@ -937,7 +937,7 @@
                 
                 <!-- Main frame (larger size) -->
                 <div style="width: 260px; height: 260px; border-radius: 22px; overflow: hidden; border: 1px solid var(--border-glass-hover); box-shadow: var(--shadow-premium); background: rgba(0, 0, 0, 0.3);">
-                  <img src="images/profile.png" alt="Yuvaraj Ramasamy" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="images/profile.jpg" alt="Yuvaraj Ramasamy" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
 
                 <!-- Small floaters -->
@@ -1109,8 +1109,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Global handle for WebGL core group reference
+    // Global handle for WebGL core group reference and rendering state
     let coreGroup = null;
+    let webglActive = false;
 
     // Register GSAP ScrollTrigger safely
     try {
@@ -1124,22 +1125,28 @@
     // 1. Current Year Footer Update
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. Floating Navbar Scroll Styling Trigger & Section Swell Sound
+    // 2. Cached DOM elements for scroll performance optimization
+    const cachedTopbar = document.querySelector('.topbar');
+    const cachedSections = document.querySelectorAll('section[id]');
+    const cachedNavlinks = document.querySelectorAll('nav .k-navlink');
+
+    // Floating Navbar Scroll Styling Trigger & Section Swell Sound
     let lastSectionId = '';
     window.addEventListener('scroll', () => {
-      const topbar = document.querySelector('.topbar');
-      if (window.scrollY > 50) {
-        topbar.classList.add('topbar-scrolled');
-      } else {
-        topbar.classList.remove('topbar-scrolled');
+      if (cachedTopbar) {
+        if (window.scrollY > 50) {
+          cachedTopbar.classList.add('topbar-scrolled');
+        } else {
+          cachedTopbar.classList.remove('topbar-scrolled');
+        }
       }
 
       // Sync navigation active class with scroll position
-      const sections = document.querySelectorAll('section[id]');
       let currentSectionId = '';
-      sections.forEach(section => {
+      const pageY = window.pageYOffset;
+      cachedSections.forEach(section => {
         const sectionTop = section.offsetTop - 250;
-        if (window.pageYOffset >= sectionTop) {
+        if (pageY >= sectionTop) {
           currentSectionId = section.getAttribute('id');
         }
       });
@@ -1151,8 +1158,7 @@
         lastSectionId = currentSectionId;
       }
 
-      const navlinks = document.querySelectorAll('nav .k-navlink');
-      navlinks.forEach(link => {
+      cachedNavlinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${currentSectionId}`) {
           link.classList.add('active');
@@ -1208,7 +1214,7 @@
         const renderer = new THREE.WebGLRenderer({ 
           canvas: canvas, 
           alpha: true, 
-          antialias: true,
+          antialias: false,
           powerPreference: "high-performance" 
         });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Capped for performance
@@ -1300,6 +1306,7 @@
 
         function animate() {
           requestAnimationFrame(animate);
+          if (!webglActive) return;
 
           const elapsedTime = clock.getElapsedTime();
           const time = elapsedTime;
@@ -1417,12 +1424,11 @@
               const wordSpan = document.createElement('span');
               wordSpan.className = 'word-wrap';
               
-              for (let char of word) {
-                const charSpan = document.createElement('span');
-                charSpan.className = 'char-reveal';
-                charSpan.textContent = char;
-                wordSpan.appendChild(charSpan);
-              }
+              const charSpan = document.createElement('span');
+              charSpan.className = 'char-reveal';
+              charSpan.textContent = word;
+              wordSpan.appendChild(charSpan);
+              
               fragment.appendChild(wordSpan);
             }
           });
@@ -2364,6 +2370,7 @@
       setTimeout(revealNextStep, 500);
 
       activateBtn.addEventListener('click', () => {
+        webglActive = true;
         playActivationChime();
         
         if (!audioCtx) initAudio();
