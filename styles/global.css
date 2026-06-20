@@ -39,7 +39,7 @@
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   height: 100%;
 }
 
@@ -98,6 +98,7 @@ a {
   padding: 8rem 0; /* Clean spaces between sections */
   position: relative;
   z-index: 2;
+  scroll-margin-top: 100px;
 }
 
 @media (max-width: 991.98px) {

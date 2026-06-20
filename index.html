@@ -1105,7 +1105,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
@@ -1140,31 +1139,39 @@
           cachedTopbar.classList.remove('topbar-scrolled');
         }
       }
+    }, { passive: true });
 
-      // Sync navigation active class with scroll position
-      let currentSectionId = '';
-      const pageY = window.pageYOffset;
+    // High-performance IntersectionObserver for active section tracking and navigation highlighting (prevents scroll reflow)
+    try {
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const currentSectionId = entry.target.getAttribute('id');
+            if (currentSectionId && currentSectionId !== lastSectionId) {
+              if (lastSectionId !== '') { // Trigger swell sound on transition
+                playCinematicSwell();
+              }
+              lastSectionId = currentSectionId;
+            }
+            cachedNavlinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, {
+        rootMargin: '-20% 0px -65% 0px', // Triggers when the section occupies the viewport's middle
+        threshold: 0.15                  // Requires at least 15% visibility to trigger
+      });
+
       cachedSections.forEach(section => {
-        const sectionTop = section.offsetTop - 250;
-        if (pageY >= sectionTop) {
-          currentSectionId = section.getAttribute('id');
-        }
+        if (section) sectionObserver.observe(section);
       });
-
-      if (currentSectionId && currentSectionId !== lastSectionId) {
-        if (lastSectionId !== '') { // Trigger only on transition
-          playCinematicSwell();
-        }
-        lastSectionId = currentSectionId;
-      }
-
-      cachedNavlinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSectionId}`) {
-          link.classList.add('active');
-        }
-      });
-    });
+    } catch (obsErr) {
+      console.warn("IntersectionObserver active section highlighting failed: ", obsErr);
+    }
 
     // Simulated Terminal Real-time logs are managed by initTerminalLogs()
 
@@ -1779,37 +1786,9 @@
     // KYROBIZ-STYLE CYBER INTERACTIVE MODULES
     // ==========================================
 
-    // 1. Lenis Smooth Scrolling Engine
-    let lenis;
-    function initLenis() {
-      try {
-        if (typeof Lenis === 'undefined') {
-          console.warn("Lenis smooth scroll library is not loaded.");
-          return;
-        }
-
-        lenis = new Lenis({
-          lerp: 0.12, // Linear interpolation (snappy scroll, zero startup delay)
-          smooth: true,
-          smoothTouch: false,
-        });
-
-        // Link Lenis scroll triggers to GSAP ScrollTrigger updates
-        if (typeof ScrollTrigger !== 'undefined') {
-          lenis.on('scroll', ScrollTrigger.update);
-        }
-        
-        // Use standard browser-native requestAnimationFrame loop for absolute browser compatibility
-        function raf(time) {
-          if (lenis) lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-      } catch (e) {
-        console.warn("Lenis initialization failed: ", e);
-      }
-
-      // Handle anchor links scroll using Lenis
+    // 1. Browser-Native Smooth Anchor Scroll Controller
+    function initAnchorScroll() {
+      // Handle anchor links scroll smoothly
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           const targetId = this.getAttribute('href');
@@ -1830,20 +1809,12 @@
                 }
               }
               
-              // Wait for offcanvas close transition to complete/start before scrolling
+              // Wait for offcanvas close transition to complete before scrolling to avoid viewport calculation jumps
               setTimeout(() => {
-                if (lenis) {
-                  lenis.scrollTo(target, { offset: -80 });
-                } else {
-                  target.scrollIntoView({ behavior: 'smooth' });
-                }
+                target.scrollIntoView({ behavior: 'smooth' });
               }, 250);
             } else {
-              if (lenis) {
-                lenis.scrollTo(target, { offset: -80 });
-              } else {
-                target.scrollIntoView({ behavior: 'smooth' });
-              }
+              target.scrollIntoView({ behavior: 'smooth' });
             }
           }
         });
@@ -3165,7 +3136,7 @@
     }
 
     safeInit('BootLoader', initBootLoader);
-    safeInit('Lenis', initLenis);
+    safeInit('AnchorScroll', initAnchorScroll);
     safeInit('HeroReveal', initHeroReveal);
     safeInit('InteractiveTimeline', initInteractiveTimeline);
     safeInit('TerminalLogs', initTerminalLogs);
