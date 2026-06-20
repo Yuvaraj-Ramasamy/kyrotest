@@ -1789,14 +1789,9 @@
         }
 
         lenis = new Lenis({
-          duration: 1.1,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          direction: 'vertical',
-          gestureDirection: 'vertical',
+          lerp: 0.12, // Linear interpolation (snappy scroll, zero startup delay)
           smooth: true,
-          mouseMultiplier: 1,
-          smoothTouch: false, // Disabled to prevent hijacking native mobile touch scroll physics
-          infinite: false,
+          smoothTouch: false,
         });
 
         // Link Lenis scroll triggers to GSAP ScrollTrigger updates
@@ -1804,20 +1799,12 @@
           lenis.on('scroll', ScrollTrigger.update);
         }
         
-        if (typeof gsap !== 'undefined') {
-          // Drive Lenis updates using GSAP ticker to avoid double animation loops
-          gsap.ticker.add((time) => {
-            if (lenis) lenis.raf(time * 1000);
-          });
-          gsap.ticker.lagSmoothing(0);
-        } else {
-          // Fallback single requestAnimationFrame loop if GSAP is not available
-          function raf(time) {
-            if (lenis) lenis.raf(time);
-            requestAnimationFrame(raf);
-          }
+        // Use standard browser-native requestAnimationFrame loop for absolute browser compatibility
+        function raf(time) {
+          if (lenis) lenis.raf(time);
           requestAnimationFrame(raf);
         }
+        requestAnimationFrame(raf);
       } catch (e) {
         console.warn("Lenis initialization failed: ", e);
       }
