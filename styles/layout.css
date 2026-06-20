@@ -49,7 +49,6 @@
   height: 28px;
   width: 28px;
   object-fit: contain;
-  mix-blend-mode: screen;
   vertical-align: middle;
   transition: var(--transition-smooth);
 }
